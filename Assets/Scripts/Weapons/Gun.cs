@@ -31,21 +31,28 @@ public class Gun : Weapon
 
     public override IEnumerator Fire()
     {
-		GameObject obj = Instantiate(ProjectilePrefab, transform.position, transform.rotation) as GameObject;
+        Projectile proj = CreateProjectile();
+        proj.SetInitialVelocity(GetAimDirection() * initialSpeed);
+        yield return null;
+    }
 
-        Projectile proj = obj.GetComponent<Projectile>();
-		proj.FiredFromGun = this;
+    protected Projectile CreateProjectile()
+    {
+        Projectile p = (Instantiate(ProjectilePrefab, transform.position, transform.rotation) as GameObject).GetComponent<Projectile>();
+        p.FiredFromGun = this;
+        return p;
+    }
 
+    protected Vector3 GetAimDirection()
+    {
         if(fireAtEnemy)
         {
-
+            // TODO: Find a target
+            return new Vector3(1, 0, 0);
         }
         else
         {
-            proj.SetInitialVelocity(fireDirection.normalized * initialSpeed);
+            return fireDirection.normalized;
         }
-        
-
-		yield return null;
     }
 }
