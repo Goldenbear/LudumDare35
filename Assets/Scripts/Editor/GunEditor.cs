@@ -11,7 +11,7 @@ public class GunEditor : Editor
 
         if(GUILayout.Button("Fire Weapon"))
         {
-            (target as Weapon).Fire();
+            (target as Weapon).SendMessage("Fire");
         }
     }
 }
