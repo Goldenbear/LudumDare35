@@ -10,7 +10,7 @@ public abstract class Weapon : MonoBehaviour
 
     float fireTime = 0f;
 
-	public bool IsFiring {get; set;}
+    public bool IsFiring;
 
     // Use this for initialization
     void Start()
