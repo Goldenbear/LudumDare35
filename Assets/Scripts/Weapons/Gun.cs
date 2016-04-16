@@ -13,10 +13,20 @@ public class Gun : Weapon
     [SerializeField, Tooltip("Our default shooting direction")]
     protected Vector3 fireDirection;
 
+	public Ship AttachedToShip {get; set;}
+
 	public Vector3 FireDirection
 	{
 		get { return fireDirection; }
 		set { fireDirection = value; }
+	}
+
+	public void ProjectileHit(Projectile proj, Ship target)
+	{
+		// Award points for kill to player that shot the gun
+		Player player = AttachedToShip as Player;
+		if(player != null)
+			player.m_score += target.m_points;
 	}
 
     public override IEnumerator Fire()
@@ -24,6 +34,7 @@ public class Gun : Weapon
 		GameObject obj = Instantiate(ProjectilePrefab, transform.position, transform.rotation) as GameObject;
 
         Projectile proj = obj.GetComponent<Projectile>();
+		proj.FiredFromGun = this;
 
         if(fireAtEnemy)
         {

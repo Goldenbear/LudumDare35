@@ -35,6 +35,8 @@ public class Projectile : MonoBehaviour {
     Rigidbody rigidBody;
     //new Collider collider;
 
+	public Gun FiredFromGun {get; set;}		// Who shot this projectile so we can notify them of hits
+
 
 	// Use this for initialization
 	void Awake () {
@@ -66,4 +68,15 @@ public class Projectile : MonoBehaviour {
     {
         // Nothing in the base for now
     }
+
+	void OnTriggerEnter(Collider otherCollider)
+	{
+		// If projectile hit a ship then notify the gun that fired us
+		Ship otherShip = otherCollider.gameObject.GetComponent<Ship>();
+
+		if((FiredFromGun != null) && (otherShip != null))
+		{
+			FiredFromGun.ProjectileHit(this, otherShip);
+		}
+	}
 }

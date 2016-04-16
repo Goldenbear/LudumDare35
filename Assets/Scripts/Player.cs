@@ -11,8 +11,7 @@ public class Player : Ship
 
 	// Public members
 	public int m_playerNumber = 0;
-
-	[NonSerialized] public int m_score = 0;
+	public int m_score = 0;
 
 	// Private members
 	private Rigidbody m_rigidbody;

@@ -17,6 +17,7 @@ public class Ship : MonoBehaviour
 
 	// Public members
 	public ShipShape m_currentShape = ShipShape.k_square;
+	public int m_points = 100;
 	private Gun m_gun;
 
 	// Change ship shape
@@ -26,6 +27,7 @@ public class Ship : MonoBehaviour
 
 		// Get new active gun
 		m_gun = GetComponentInChildren<Gun>();
+		m_gun.AttachedToShip = this;
 	}
 
 	// Fire a bullet in the given direction
@@ -48,6 +50,7 @@ public class Ship : MonoBehaviour
 	{
 		// Get active gun
 		m_gun = GetComponentInChildren<Gun>();
+		m_gun.AttachedToShip = this;
 	}
 	
 	// Update is called once per frame
