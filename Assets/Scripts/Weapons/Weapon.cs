@@ -10,7 +10,10 @@ public abstract class Weapon : MonoBehaviour
 
     float fireTime = 0f;
 
-	public bool IsFiring {get; set;}
+    [SerializeField]
+    bool isFiring;
+
+    Coroutine firingCoroutine;
 
     // Use this for initialization
     void Start()
@@ -24,15 +27,36 @@ public abstract class Weapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if(IsFiring)
+		if(isFiring)
 		{
 	        fireTime += Time.deltaTime;
 	        if(FireRate > 0f && fireTime > FireRate)
 	        {
 	            fireTime = 0f;
-	            this.StartCoroutine(Fire());
+                StartFireRoutine();
 	        }
 		}
+    }
+
+    public void StartFiring()
+    {
+        StartFireRoutine();
+        isFiring = true;
+    }
+
+    public void StopFiring()
+    {
+        if(firingCoroutine != null)
+        {
+            this.StopCoroutine(firingCoroutine);
+        }
+        isFiring = false;
+    }
+
+    private void StartFireRoutine()
+    {
+        if (firingCoroutine != null) this.StopCoroutine(firingCoroutine);
+        firingCoroutine = this.StartCoroutine(Fire());
     }
 
     public abstract IEnumerator Fire();
