@@ -32,7 +32,7 @@ public class Projectile : MonoBehaviour {
     float elapsedLife;
     Vector3 initialVelocity;
 
-    Rigidbody rigidBody;
+    Rigidbody rb;
     //new Collider collider;
 
 	public Gun FiredFromGun {get; set;}		// Who shot this projectile so we can notify them of hits
@@ -40,13 +40,13 @@ public class Projectile : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        rigidBody = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         //collider = GetComponent<Collider>();
 	}
 
     void Start()
     {
-        rigidBody.velocity = initialVelocity;
+        rb.velocity = initialVelocity;
     }
 	
 	// Update is called once per frame

@@ -33,14 +33,14 @@ public class Ship : MonoBehaviour
 	// Fire a bullet in the given direction
 	public void Fire(Vector3 dir)
 	{
-		m_gun.IsFiring = true;
+        m_gun.StartFiring();
 		m_gun.FireDirection = dir;
 	}
 
 	// Stop firing bullets
 	public void StopFiring()
 	{
-		m_gun.IsFiring = false;
+        m_gun.StopFiring();
 	}
 
 	// Private members
