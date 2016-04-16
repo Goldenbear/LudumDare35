@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
 		m_highScore = PlayerPrefs.GetInt("Highscore", m_highScore);
 
 		// Start state depends on which scene we started on
-		if(Application.loadedLevelName == "Splash")
+		if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Splash")
 			StateChange(EGameState.k_splash);
 		else
 			StateChange(EGameState.k_level);
@@ -136,14 +136,14 @@ public class GameManager : MonoBehaviour
 		{
 			case EGameState.k_splash:
 			{
-				if(Application.loadedLevelName != "Splash")
-					Application.LoadLevel("Splash");
+				if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "Splash")
+					UnityEngine.SceneManagement.SceneManager.LoadScene("Splash");
 			}
 			break;
 
 			case EGameState.k_level:
 			{
-				Application.LoadLevel("Gameplay");
+				UnityEngine.SceneManagement.SceneManager.LoadScene("Gameplay");
 			}
 			break;
 
