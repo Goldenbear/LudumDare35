@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
 /// <summary>
@@ -10,14 +11,15 @@ public class Player : Ship
 
 	// Public members
 	public int m_playerNumber = 0;
+	public int m_score = 0;
 
 	// Private members
-	private Rigidbody rigidbody;
+	private Rigidbody m_rigidbody;
 
 	// Use this for initialization
-	void Start () 
+	void Start() 
 	{
-		rigidbody = GetComponent<Rigidbody>();
+		m_rigidbody = GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
@@ -34,9 +36,25 @@ public class Player : Ship
 		float yAxisL = Input.GetAxis(prefix+"VerticalL");
 		float xAxisR = Input.GetAxis(prefix+"HorizontalR");
 		float yAxisR = Input.GetAxis(prefix+"VerticalR");
+		Vector3 moveDir = new Vector3(xAxisL, -yAxisL, 0.0f);
+		Vector3 fireDir = new Vector3(xAxisR, -yAxisR, 0.0f);
 
-		rigidbody.AddForce(Vector3.right * xAxisL * k_sensitivity);
-		rigidbody.AddForce(Vector3.down * yAxisL * k_sensitivity);
+		// Move
+		if(moveDir.sqrMagnitude > 0.5f)
+		{
+			m_rigidbody.AddForce(Vector3.right * xAxisL * k_sensitivity);
+			m_rigidbody.AddForce(Vector3.down * yAxisL * k_sensitivity);
+		}
+
+		// Fire
+		if(fireDir.sqrMagnitude > 0.5f)
+		{
+			Fire(fireDir.normalized);
+		}
+		else
+		{
+			StopFiring();
+		}
 
 		if(Input.GetButtonDown(prefix+"Fire1"))
 		{
