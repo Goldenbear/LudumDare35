@@ -23,9 +23,9 @@ public class Gun : Weapon
 
 	public void ProjectileHit(Projectile proj, Ship target)
 	{
-		// Award points for kill to player that shot the gun
+		// Award points for kill to player that shot the gun ONLY if we didnt shoot ourselves!
 		Player player = AttachedToShip as Player;
-		if(player != null)
+		if((player != null) && (player != target))
 			player.m_score += target.m_points;
 	}
 
