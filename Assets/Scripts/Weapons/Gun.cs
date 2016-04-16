@@ -13,10 +13,15 @@ public class Gun : Weapon
     [SerializeField, Tooltip("Our default shooting direction")]
     protected Vector3 fireDirection;
 
+	public Vector3 FireDirection
+	{
+		get { return fireDirection; }
+		set { fireDirection = value; }
+	}
 
     public override IEnumerator Fire()
     {
-        GameObject obj = Instantiate(ProjectilePrefab);
+		GameObject obj = Instantiate(ProjectilePrefab, transform.position, transform.rotation) as GameObject;
 
         Projectile proj = obj.GetComponent<Projectile>();
 
@@ -30,6 +35,6 @@ public class Gun : Weapon
         }
         
 
-        return null;
+		yield return null;
     }
 }

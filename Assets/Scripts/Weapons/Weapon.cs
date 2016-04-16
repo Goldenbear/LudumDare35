@@ -10,7 +10,7 @@ public abstract class Weapon : MonoBehaviour
 
     float fireTime = 0f;
 
-
+	public bool IsFiring {get; set;}
 
     // Use this for initialization
     void Start()
@@ -24,12 +24,15 @@ public abstract class Weapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        fireTime += Time.deltaTime;
-        if(FireRate > 0f && fireTime > FireRate)
-        {
-            fireTime = 0f;
-            this.StartCoroutine(Fire());
-        }
+		if(IsFiring)
+		{
+	        fireTime += Time.deltaTime;
+	        if(FireRate > 0f && fireTime > FireRate)
+	        {
+	            fireTime = 0f;
+	            this.StartCoroutine(Fire());
+	        }
+		}
     }
 
     public abstract IEnumerator Fire();

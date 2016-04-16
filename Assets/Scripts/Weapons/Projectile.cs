@@ -33,13 +33,13 @@ public class Projectile : MonoBehaviour {
     Vector3 initialVelocity;
 
     Rigidbody rigidBody;
-    Collider collider;
+    //new Collider collider;
 
 
 	// Use this for initialization
 	void Awake () {
         rigidBody = GetComponent<Rigidbody>();
-        collider = GetComponent<Collider>();
+        //collider = GetComponent<Collider>();
 	}
 
     void Start()
