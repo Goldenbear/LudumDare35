@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
+using UnityEngine.UI;
 
 /// <summary>
 /// A Player ship and its controls
@@ -12,6 +13,7 @@ public class Player : Ship
 	// Public members
 	public int m_playerNumber = 0;
 	public int m_score = 0;
+	public Text m_scoreUIText;
 
 	// Private members
 	private Rigidbody m_rigidbody;
@@ -26,6 +28,9 @@ public class Player : Ship
 	void Update() 
 	{
 		PlayerControls();
+
+		if(m_scoreUIText != null)
+			m_scoreUIText.text = string.Format("{0:00000000}", m_score);
 	}
 
 	// Update controls from the appropriate input for this player
