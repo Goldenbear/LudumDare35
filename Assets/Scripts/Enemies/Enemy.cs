@@ -60,7 +60,8 @@ public class Enemy : MonoBehaviour
     void Awake()
     {
         theShip = GetComponent<Ship>();
-        r = GetComponent<Renderer>();
+        theShip.OnShipDestroyed.AddListener(OnShipDestroyed);
+        r = GetComponentInChildren<Renderer>();
         initialVelocity = defaultMoveDirection;
     }
 
@@ -224,6 +225,11 @@ public class Enemy : MonoBehaviour
         exitVector = Quaternion.AngleAxis(degree, Vector3.back) * exitVector * exitSpeed;
 
         return exitVector;
+    }
+
+    void OnShipDestroyed(Ship deadShip)
+    {
+        RemoveEnemy();
     }
 
 }
