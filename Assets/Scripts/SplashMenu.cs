@@ -60,15 +60,27 @@ public class SplashMenu : MonoBehaviour
 		}
 
 		// Select current menu item
-		if( Input.GetButtonDown("P1Fire1"+suffix) || Input.GetButtonDown("P2Fire1"+suffix) ||
-			Input.GetButtonDown("P1Fire2"+suffix) || Input.GetButtonDown("P2Fire2"+suffix) ||
-			Input.GetButtonDown("P1Fire3"+suffix) || Input.GetButtonDown("P2Fire3"+suffix) ||
-			Input.GetButtonDown("P1Fire4"+suffix) || Input.GetButtonDown("P2Fire4"+suffix) ||
+		if( Input.GetButtonDown("P1Fire1"+suffix) || 
+			Input.GetButtonDown("P1Fire2"+suffix) || 
+			Input.GetButtonDown("P1Fire3"+suffix) || 
+			Input.GetButtonDown("P1Fire4"+suffix) || 
 			Input.GetKeyDown("space") ||
 			Input.GetKeyDown("return") )
 		{
 			if(m_currentButton == 0)
-				GameManager.Get.GameStart(1);
+				GameManager.Get.GameStart(1, 1);
+			else
+			if(m_currentButton == 1)
+				GameManager.Get.GameStart(2);
+		}
+
+		if( Input.GetButtonDown("P2Fire1"+suffix) ||
+			Input.GetButtonDown("P2Fire2"+suffix) ||
+			Input.GetButtonDown("P2Fire3"+suffix) ||
+			Input.GetButtonDown("P2Fire4"+suffix) )
+		{
+			if(m_currentButton == 0)
+				GameManager.Get.GameStart(1, 2);
 			else
 			if(m_currentButton == 1)
 				GameManager.Get.GameStart(2);
