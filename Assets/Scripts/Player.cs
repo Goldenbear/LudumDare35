@@ -37,14 +37,6 @@ public class Player : Ship
 		UpdateHUD();
 	}
 
-	// Face ship in this direction
-	void FaceDirection(Vector3 desiredDir)
-	{
-		Quaternion qCurrent = transform.rotation;
-		Quaternion qDesired = Quaternion.LookRotation(Vector3.forward, desiredDir);
-		transform.rotation = Quaternion.RotateTowards(qCurrent, qDesired, k_turnSpeed * Time.deltaTime);
-	}
-
 	// Update controls from the appropriate input for this player
 	void PlayerControls() 
 	{
@@ -72,7 +64,7 @@ public class Player : Ship
 		// Fire
 		if(fireDir.sqrMagnitude > 0.5f)
 		{
-			FaceDirection(fireDir);
+			FaceDirection(fireDir, k_turnSpeed);
 			Fire(fireDir.normalized);
 		}
 		else
