@@ -71,6 +71,14 @@ public class Ship : MonoBehaviour
 
 	public void ShapeShift(ShipShape newShape)
 	{
+		// If already this shape do nothing
+		if(newShape == m_currentShape)
+			return;
+		
+		// If a shift is already pending dont trigger another one
+		if(m_currentShape != m_oldShape)
+			return;
+		
 		m_oldShape = m_currentShape;
 		m_currentShape = newShape;
 		anim.SetTrigger("changeShape");
@@ -82,6 +90,9 @@ public class Ship : MonoBehaviour
 		// Deactivate previous shape and activate new shape
 		m_shapes[(int)m_oldShape].SetActive(false);
 		m_shapes[(int)m_currentShape].SetActive(true);
+
+		// Set old shape to current to signify we have shifted
+		m_oldShape = m_currentShape;
 
 		// Get new active gun
 		m_gun = GetComponentInChildren<Gun>();
