@@ -72,16 +72,21 @@ public class Projectile : MonoBehaviour {
             if (!(otherShip is Player) && !(originShip is Player))
                 return;
 
+            // Don't hit yourself stupid
+            if (otherShip == originShip)
+                return;
+
             if (DoesProjectileHurtShip(otherShip.m_currentShape, this.type))
             {
+                // WE MADE IT
                 //if (otherShip is Player) Debug.Log("Hit player with " + this.type);
                 //if (FiredFromGun.AttachedToShip is Player) Debug.Log("Player hit " + otherShip.m_currentShape);
                 FiredFromGun.ProjectileHit(this, otherShip);
+
+                // Once a projectile hits something it should disappear
+                Destroy(gameObject);
             }
         }
-
-		// Once a projectile hits something it should disappear
-		Destroy(gameObject);
     }
 
     /// <summary>
