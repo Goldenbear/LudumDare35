@@ -49,15 +49,15 @@ public class Player : Ship
 	void PlayerControls() 
 	{
 		string prefix = "P"+(m_playerNumber+1);
+#if UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX
+		string suffix = "_OSX";
+#else
+		string suffix = "";
+#endif
 		float xAxisL = Input.GetAxis(prefix+"HorizontalL");
 		float yAxisL = Input.GetAxis(prefix+"VerticalL");
-#if UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX
-		float xAxisR = Input.GetAxis(prefix+"HorizontalR_OSX");
-		float yAxisR = Input.GetAxis(prefix+"VerticalR_OSX");
-#else
-		float xAxisR = Input.GetAxis(prefix+"HorizontalR");
-		float yAxisR = Input.GetAxis(prefix+"VerticalR");
-#endif
+		float xAxisR = Input.GetAxis(prefix+"HorizontalR"+suffix);
+		float yAxisR = Input.GetAxis(prefix+"VerticalR"+suffix);
 		Vector3 moveDir = new Vector3(xAxisL, -yAxisL, 0.0f);
 		Vector3 fireDir = new Vector3(xAxisR, -yAxisR, 0.0f);
 
@@ -80,25 +80,25 @@ public class Player : Ship
 			StopFiring();
 		}
 
-		if(Input.GetButtonDown(prefix+"Fire1"))
+		if(Input.GetButtonDown(prefix+"Fire1"+suffix))
 		{
 			ShapeShift(ShipShape.k_square);
 			Debug.Log(prefix+"Fire1");
 		}
 		else
-		if(Input.GetButtonDown(prefix+"Fire2"))
+		if(Input.GetButtonDown(prefix+"Fire2"+suffix))
 		{
 			ShapeShift(ShipShape.k_circle);
 			Debug.Log(prefix+"Fire2");
 		}
 		else
-		if(Input.GetButtonDown(prefix+"Fire3"))
+		if(Input.GetButtonDown(prefix+"Fire3"+suffix))
 		{
 			ShapeShift(ShipShape.k_triangle);
 			Debug.Log(prefix+"Fire3");
 		}
 		else
-		if(Input.GetButtonDown(prefix+"Fire4"))
+		if(Input.GetButtonDown(prefix+"Fire4"+suffix))
 		{
 			ShapeShift(ShipShape.k_cross);
 			Debug.Log(prefix+"Fire4");
