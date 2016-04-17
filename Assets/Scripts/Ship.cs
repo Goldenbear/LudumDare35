@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
-
+using UnityEngine.Events;
 
 /// <summary>
 /// Abstract base class for all ships.
@@ -9,6 +9,9 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody))]
 public class Ship : MonoBehaviour
 {
+    public class ShipDestroyedEvent : UnityEvent<Ship> { }
+    public ShipDestroyedEvent OnShipDestroyed = new Ship.ShipDestroyedEvent();
+
     // What ship shape is a shape shifting ship if the ship's shape keeps on shifting
     public enum ShipShape
     {
@@ -32,7 +35,8 @@ public class Ship : MonoBehaviour
 		m_health -= damage;
 		if(m_health <= 0)
 		{
-			// Die
+            // Let whoever is controlling the ship handle cleanup
+            OnShipDestroyed.Invoke(this);
 		}
 	}
 
@@ -101,7 +105,10 @@ public class Ship : MonoBehaviour
 	{
 		// Get active gun
 		m_gun = GetComponentInChildren<Gun>();
-		m_gun.AttachedToShip = this;
+        if(m_gun != null)
+        {
+            m_gun.AttachedToShip = this;
+        }
 
         m_rigidbody = GetComponent<Rigidbody>();
     }
