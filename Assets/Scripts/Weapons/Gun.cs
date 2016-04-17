@@ -5,6 +5,16 @@ using UnityEngine;
 
 public class Gun : Weapon
 {
+    private PlayerAudioManger pam;
+    void Start()
+    {
+        if (AttachedToShip is Player)
+        {
+            Debug.Log("Ship Shape!");
+            pam = AttachedToShip.gameObject.GetComponent<PlayerAudioManger>();
+        }
+    }
+
     [SerializeField, Tooltip("Initial speed of the projectile")]
     protected float initialSpeed;
     
@@ -43,6 +53,13 @@ public class Gun : Weapon
     {
         Projectile p = (Instantiate(ProjectilePrefab, transform.position, transform.rotation) as GameObject).GetComponent<Projectile>();
         p.FiredFromGun = this;
+
+        if (AttachedToShip is Player)
+        {
+            //Debug.Log("Pew Pew");            
+            pam.PlayBulletSound();
+        }
+
         return p;
     }
 

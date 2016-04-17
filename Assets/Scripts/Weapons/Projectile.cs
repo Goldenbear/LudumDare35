@@ -81,6 +81,9 @@ public class Projectile : MonoBehaviour {
                 if (otherShip is Player) Debug.Log("Hit player with " + this.type);
                 if (FiredFromGun.AttachedToShip is Player) Debug.Log("Player hit " + otherShip.m_currentShape);
                 FiredFromGun.ProjectileHit(this, otherShip);
+
+                //if(this bullet was fired by the Enemy && this ship is a player)
+                //PAM.PlayHitSound()
             }
         }
 		
