@@ -26,7 +26,6 @@ public class ExaustLight : MonoBehaviour {
 		{
 			currIntensity = Mathf.Lerp(currIntensity, maxIntensity, RampUpSpeed * Time.deltaTime); 
 			light.intensity = currIntensity;
-			Debug.Log(currIntensity);
 			if (light.intensity >= maxIntensity -0.05)
 			{
 				isRamped = true;

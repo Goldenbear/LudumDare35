@@ -20,11 +20,14 @@ public class Ship : MonoBehaviour
 
 	// Public members
 	public int m_health = 100;
+	public ShipShape m_oldShape = ShipShape.k_square;
 	public ShipShape m_currentShape = ShipShape.k_square;
 	public int m_points = 100;
 	private Gun m_gun;
 
 	public Rigidbody ShipBody {get{ return m_rigidbody; }}
+	// Manually assign this guy
+	public Animator anim;
 
 	// Take a hit
 	public void Hit(int damage=1)
@@ -66,14 +69,18 @@ public class Ship : MonoBehaviour
         m_rigidbody.AddForce(totalForce);
     }
 
+	public void ShapeShift(ShipShape newShape)
+	{
+		m_oldShape = m_currentShape;
+		m_currentShape = newShape;
+		anim.SetTrigger("changeShape");
+	}
+
     // Change ship shape
-    public void ShapeShift(ShipShape newShape)
+	public void ShapeShiftNow()
 	{
 		// Deactivate previous shape and activate new shape
-		m_shapes[(int)m_currentShape].SetActive(false);
-
-		m_currentShape = newShape;
-
+		m_shapes[(int)m_oldShape].SetActive(false);
 		m_shapes[(int)m_currentShape].SetActive(true);
 
 		// Get new active gun
