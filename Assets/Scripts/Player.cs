@@ -14,8 +14,21 @@ public class Player : Ship
 	// Public members
 	public int m_playerNumber = 0;
 	public int m_score = 0;
+	public Text m_scoreUITitle;
 	public Text m_scoreUIText;
 	public Image m_healthUIBar;
+
+	public void Deactivate()
+	{
+		gameObject.SetActive(false);
+
+		if(m_scoreUITitle != null)
+			m_scoreUITitle.gameObject.SetActive(false);
+		if(m_scoreUIText != null)
+			m_scoreUIText.gameObject.SetActive(false);
+		if(m_healthUIBar != null)
+			m_healthUIBar.transform.parent.gameObject.SetActive(false);
+	}
 
 	// Private members
 	private float m_healthBarOriginalWidth;
@@ -40,7 +53,8 @@ public class Player : Ship
 	// Update controls from the appropriate input for this player
 	void PlayerControls() 
 	{
-		string prefix = "P"+(m_playerNumber+1);
+		int playerNumber = (m_playerNumber == 0) ? GameManager.Get.PlayerOneNumber : GameManager.Get.PlayerTwoNumber;
+		string prefix = "P"+playerNumber;
 #if UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX
 		string suffix = "_OSX";
 #else

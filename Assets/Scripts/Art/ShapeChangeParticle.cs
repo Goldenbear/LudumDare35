@@ -7,7 +7,7 @@ public class ShapeChangeParticle : MonoBehaviour {
 	public GameObject shiftEffect;
 	private bool hasTriggered = false;
 	private float timer;
-	private float timeOfEffect = 7.0f;
+	private float timeOfEffect = 8.5f;
 
 	public List<ParticleSystem> engineEffcts = new List<ParticleSystem>();
 
