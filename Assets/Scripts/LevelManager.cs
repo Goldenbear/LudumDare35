@@ -40,6 +40,11 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
+	// Globals
+	private static LevelManager g_instance;
+
+	public static LevelManager Get { get { return g_instance; } }
+
 	// Public members
 	public SoundConfig				m_introSound;
 	public SoundConfig				m_backgroundSound;
@@ -63,6 +68,9 @@ public class LevelManager : MonoBehaviour
 	/// </summary>
 	private void Awake()
 	{
+		if(g_instance == null)
+			g_instance = this;
+
 		// Find players
 		m_players = FindObjectsOfType(typeof(Player)) as Player[];
 
