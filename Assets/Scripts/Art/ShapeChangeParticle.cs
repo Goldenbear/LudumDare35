@@ -6,7 +6,7 @@ public class ShapeChangeParticle : MonoBehaviour {
 	public GameObject shiftEffect;
 	private bool hasTriggered = false;
 	private float timer;
-	private float timeOfEffect;
+	private float timeOfEffect = 7.0f;
 
 	public Player playerScript;
 
