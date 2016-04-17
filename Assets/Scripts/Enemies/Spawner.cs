@@ -4,15 +4,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Spawner : MonoBehaviour
 {
+    public enum StartTrigger
+    {
+        Immediate,
+        PreviousSpawnComplete,
+        PreviousEnemiesDead,
+    }
+
     protected enum VelocitySet
     {
         None,
         Random,
         Specified
     }
+
+    [Serializable]
+    public class EnemySpawnedEvent : UnityEvent<Enemy> { }
+
+    public EnemySpawnedEvent OnEnemySpawned = new EnemySpawnedEvent();
 
     [SerializeField, Tooltip("Prefab of the enemy to spawn")]
     GameObject enemyPrefab;
@@ -32,7 +45,19 @@ public class Spawner : MonoBehaviour
     [SerializeField, Tooltip("The initial velocity of the ships")]
     protected Vector3 enemyInitialVelocity;
 
+    [SerializeField, Tooltip("What triggers the starting of this spawner")]
+    protected StartTrigger startTrigger;
+
     protected int enemiesSpawned = 0;
+
+    public bool IsSpawning { get { return enemiesSpawned > 0; } }
+    public StartTrigger SpawnTrigger { get { return startTrigger; } }
+
+
+    void Awake()
+    {
+        
+    }
 
     void Start()
     {
@@ -69,6 +94,8 @@ public class Spawner : MonoBehaviour
         e.SetExitStrategy(exit);
         
         enemiesSpawned++;
+
+        OnEnemySpawned.Invoke(e);
         return e;
     }
 
