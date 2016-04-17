@@ -11,6 +11,8 @@ public class Player : Ship
 	private const float k_sensitivity = 50.0f;
 	private const float k_turnSpeed = 360.0f;
 
+    private PlayerAudioManger pam;
+
 	// Public members
 	public int m_playerNumber = 0;
 	public int m_score = 0;
@@ -40,6 +42,8 @@ public class Player : Ship
 
 		if(m_healthUIBar != null)
 			m_healthBarOriginalWidth = m_healthUIBar.rectTransform.sizeDelta.x;
+
+        pam = GetComponent<PlayerAudioManger>();
 	}
 	
 	// Update is called once per frame
@@ -90,24 +94,28 @@ public class Player : Ship
 		{
 			ShapeShift(ShipShape.k_cross);
 			Debug.Log(prefix+"Fire1");
+            pam.PlayShiftShapeSound();
 		}
 		else
 		if(Input.GetButtonDown(prefix+"Fire2"+suffix))
 		{
 			ShapeShift(ShipShape.k_circle);
 			Debug.Log(prefix+"Fire2");
+            pam.PlayShiftShapeSound();
 		}
 		else
 		if(Input.GetButtonDown(prefix+"Fire3"+suffix))
 		{
 			ShapeShift(ShipShape.k_square);
 			Debug.Log(prefix+"Fire3");
+            pam.PlayShiftShapeSound();
 		}
 		else
 		if(Input.GetButtonDown(prefix+"Fire4"+suffix))
 		{
 			ShapeShift(ShipShape.k_triangle);
 			Debug.Log(prefix+"Fire4");
+            pam.PlayShiftShapeSound();
 		}
 	}
 
