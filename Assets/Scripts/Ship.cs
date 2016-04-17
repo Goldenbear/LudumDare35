@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
+
 
 /// <summary>
 /// Abstract base class for all ships.
@@ -7,13 +9,13 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody))]
 public class Ship : MonoBehaviour
 {
-    // What ship shape is a shape shifting ship if the ship's shape shifts
+    // What ship shape is a shape shifting ship if the ship's shape keeps on shifting
     public enum ShipShape
     {
-        k_square,
-        k_circle,
-        k_triangle,
-        k_cross
+        k_square	= 0,
+        k_circle	= 1,
+        k_triangle	= 2,
+        k_cross		= 3
     }
 
 	// Public members
@@ -21,6 +23,8 @@ public class Ship : MonoBehaviour
 	public ShipShape m_currentShape = ShipShape.k_square;
 	public int m_points = 100;
 	private Gun m_gun;
+
+	public Rigidbody ShipBody {get{ return m_rigidbody; }}
 
 	// Take a hit
 	public void Hit(int damage=1)
@@ -34,12 +38,21 @@ public class Ship : MonoBehaviour
 
     // Private members
     private Rigidbody m_rigidbody;
+	private GameObject[] m_shapes;
 
-    public Rigidbody ShipBody {get{ return m_rigidbody; }}
 
     protected virtual void Start()
-    {
-        
+	{
+		// Find the shape gameobjects
+		m_shapes = new GameObject[Enum.GetValues(typeof(ShipShape)).Length];
+		foreach(ShipShape shape in Enum.GetValues(typeof(ShipShape)))
+		{
+			string shapeName = shape.ToString().Substring(2);
+			shapeName = "PlayerAnimNode/"+Char.ToUpper(shapeName[0])+shapeName.Substring(1).ToLower();
+			Transform shapeT = transform.Find(shapeName);
+			if(shapeT != null)
+				m_shapes[(int)shape] = shapeT.gameObject;
+		}
     }
 
     public void SetVelocity(Vector3 newVelocity)
@@ -56,7 +69,12 @@ public class Ship : MonoBehaviour
     // Change ship shape
     public void ShapeShift(ShipShape newShape)
 	{
+		// Deactivate previous shape and activate new shape
+		m_shapes[(int)m_currentShape].SetActive(false);
+
 		m_currentShape = newShape;
+
+		m_shapes[(int)m_currentShape].SetActive(true);
 
 		// Get new active gun
 		m_gun = GetComponentInChildren<Gun>();
