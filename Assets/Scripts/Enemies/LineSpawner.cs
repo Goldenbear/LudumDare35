@@ -113,13 +113,14 @@ public class LineSpawner : FormationSpawner
 
     Vector3 GenerateOffsetVector(float offset)
     {
+        Vector3 thisPos = this.transform.position;
         switch (orient)
         {
             case Orientation.Horizontal:
-                return new Vector3(offset, 0);
+                return new Vector3(thisPos.x + offset, thisPos.y);
             case Orientation.Vertical:
             default:
-                return new Vector3(0, offset);
+                return new Vector3(thisPos.x, thisPos.y + offset);
         }
     }
 }

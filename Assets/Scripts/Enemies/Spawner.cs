@@ -7,6 +7,13 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    protected enum VelocitySet
+    {
+        None,
+        Random,
+        Specified
+    }
+
     [SerializeField, Tooltip("Prefab of the enemy to spawn")]
     GameObject enemyPrefab;
 
@@ -15,6 +22,15 @@ public class Spawner : MonoBehaviour
 
     [SerializeField, Tooltip("Seconds between spawn times")]
     protected float spawnTime;
+
+    [SerializeField, Tooltip("General direction the enemies will leave the screen")]
+    protected Enemy.ExitStrategy exit;
+
+    [SerializeField, Tooltip("How we set an enemy's initial velocity")]
+    protected VelocitySet velocitySet;
+
+    [SerializeField, Tooltip("The initial velocity of the ships")]
+    protected Vector3 enemyInitialVelocity;
 
     protected int enemiesSpawned = 0;
 
@@ -46,6 +62,12 @@ public class Spawner : MonoBehaviour
     protected Enemy SpawnEnemy(Vector3 spawnPoint, Quaternion rotation = new Quaternion())
     {
         Enemy e = (Instantiate(enemyPrefab, spawnPoint, rotation) as GameObject).GetComponent<Enemy>();
+        if(velocitySet == VelocitySet.Specified)
+        {
+            e.SetInitialVelocity(enemyInitialVelocity);
+        }
+        e.SetExitStrategy(exit);
+        
         enemiesSpawned++;
         return e;
     }
@@ -54,7 +76,7 @@ public class Spawner : MonoBehaviour
     {
         while(enemiesSpawned < numEnemies)
         {
-            Enemy enemy = SpawnEnemy();
+            SpawnEnemy();
             if (spawnTime > 0) yield return new WaitForSeconds(spawnTime);
         }
         yield return null;
