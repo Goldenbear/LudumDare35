@@ -1,6 +1,4 @@
-﻿#define DEBUGHELDKEYSx
-
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -73,6 +71,11 @@ public class LevelManager : MonoBehaviour
 
 		// Find players
 		m_players = FindObjectsOfType(typeof(Player)) as Player[];
+
+		// Deactivate unwanted players
+		for(int i=0; i<m_players.Length; i++)
+			if(i >= GameManager.Get.NumPlayers)
+				m_players[i].Deactivate();
 
 		// Find UI elements
 		Text[] texts = FindObjectsOfType(typeof(Text)) as Text[];

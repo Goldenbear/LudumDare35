@@ -17,6 +17,15 @@ public class Player : Ship
 	public Text m_scoreUIText;
 	public Image m_healthUIBar;
 
+	public void Deactivate()
+	{
+		gameObject.SetActive(false);
+		if(m_scoreUIText != null)
+			m_scoreUIText.transform.parent.gameObject.SetActive(false);
+		if(m_healthUIBar != null)
+			m_healthUIBar.transform.parent.gameObject.SetActive(false);
+	}
+
 	// Private members
 	private float m_healthBarOriginalWidth;
 

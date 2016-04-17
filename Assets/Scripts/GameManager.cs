@@ -46,10 +46,18 @@ public class GameManager : MonoBehaviour
 	private EGameState m_gameState = EGameState.k_splash;
 	private int m_highScore = 0;
 	private int m_score = 0;
+	private int m_numPlayers = 0;
 
 	// Public methods
 	public int Score { get { return m_score; } set { m_score = value; } }
 	public int HighScore { get { return m_highScore; } }
+	public int NumPlayers { get { return m_numPlayers; } }
+
+	public void GameStart(int numPlayers)
+	{
+		m_numPlayers = numPlayers;
+		StateChange(EGameState.k_level);
+	}
 
 	public void GameOver()
 	{
@@ -102,11 +110,6 @@ public class GameManager : MonoBehaviour
 		{
 			case EGameState.k_splash:
 			{
-				if(Input.GetKeyDown("return"))
-				{
-					StateChange(EGameState.k_level);
-				}
-
 				if(Input.GetKeyDown(KeyCode.Escape))
 				{
 					Application.Quit();
