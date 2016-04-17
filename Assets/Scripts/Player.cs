@@ -15,13 +15,12 @@ public class Player : Ship
 	public int m_score = 0;
 	public Text m_scoreUIText;
 
-	// Private members
-	private Rigidbody m_rigidbody;
+	
 
 	// Use this for initialization
-	void Start() 
+	protected override void Start() 
 	{
-		m_rigidbody = GetComponent<Rigidbody>();
+        base.Start();
 	}
 	
 	// Update is called once per frame
@@ -47,8 +46,9 @@ public class Player : Ship
 		// Move
 		if(moveDir.sqrMagnitude > 0.5f)
 		{
-			m_rigidbody.AddForce(Vector3.right * xAxisL * k_sensitivity);
-			m_rigidbody.AddForce(Vector3.down * yAxisL * k_sensitivity);
+            Vector3 horizontal = Vector3.right * xAxisL * k_sensitivity;
+            Vector3 vertical = Vector3.down * yAxisL * k_sensitivity;
+            Move(horizontal, vertical);
 		}
 
 		// Fire
