@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class Player : Ship 
 {
 	private const float k_sensitivity = 50.0f;
+	private const float k_turnSpeed = 360.0f;
 
 	// Public members
 	public int m_playerNumber = 0;
@@ -30,6 +31,14 @@ public class Player : Ship
 
 		if(m_scoreUIText != null)
 			m_scoreUIText.text = string.Format("{0:00000000}", m_score);
+	}
+
+	// Face ship in this direction
+	void FaceDirection(Vector3 desiredDir)
+	{
+		Quaternion qCurrent = transform.rotation;
+		Quaternion qDesired = Quaternion.LookRotation(Vector3.forward, desiredDir);
+		transform.rotation = Quaternion.RotateTowards(qCurrent, qDesired, k_turnSpeed * Time.deltaTime);
 	}
 
 	// Update controls from the appropriate input for this player
@@ -59,6 +68,7 @@ public class Player : Ship
 		// Fire
 		if(fireDir.sqrMagnitude > 0.5f)
 		{
+			FaceDirection(fireDir);
 			Fire(fireDir.normalized);
 		}
 		else
