@@ -57,10 +57,23 @@ public class Ship : MonoBehaviour
 				m_shapes[(int)shape] = shapeT.gameObject;
 		}
     }
+		
+	// Face ship in this direction
+	protected void FaceDirection(Vector3 desiredDir, float turnSpeed=-1)
+	{
+		Quaternion qCurrent = transform.rotation;
+		Quaternion qDesired = Quaternion.LookRotation(Vector3.forward, desiredDir);
+
+		if(turnSpeed > 0.0f)
+			transform.rotation = Quaternion.RotateTowards(qCurrent, qDesired, turnSpeed * Time.deltaTime);
+		else
+			transform.rotation = qDesired;
+	}
 
     public void SetVelocity(Vector3 newVelocity)
     {
         m_rigidbody.velocity = newVelocity;
+		FaceDirection(newVelocity.normalized);
     }
 
     public void Move(Vector3 horizontalForce, Vector3 verticalForce)
