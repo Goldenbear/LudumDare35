@@ -4,18 +4,9 @@ using UnityEngine;
 
 public class FormationSpawner : Spawner
 {
-    enum Formation
-    {
-        Line,
-        Square,
-        Circle
-    }
-
     [SerializeField, Tooltip("Units from one size of the formation to the other")]
     protected float formationSize;
 
-    //[SerializeField, Tooltip("The formation the units spawn in")]
-    //Formation form;
 
     protected List<Vector3> spawnPoints;
 
@@ -28,8 +19,6 @@ public class FormationSpawner : Spawner
             Debug.LogErrorFormat("We did not generate enough spawn points for all enemies. Killing spawn.");
             RemoveSpawner();
         }
-
-        // TODO: Interate through ships and spawn points
 
         foreach(Vector3 sp in spawnPoints)
         {

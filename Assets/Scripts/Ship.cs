@@ -4,6 +4,7 @@ using System.Collections;
 /// <summary>
 /// Abstract base class for all ships.
 /// </summary>
+[RequireComponent(typeof(Rigidbody))]
 public class Ship : MonoBehaviour 
 {
 	// What ship shape is a shape shifting ship if the ship's shape shifts
@@ -20,8 +21,22 @@ public class Ship : MonoBehaviour
 	public int m_points = 100;
 	private Gun m_gun;
 
-	// Change ship shape
-	public void ShapeShift(ShipShape newShape)
+    // Private members
+    private Rigidbody m_rigidbody;
+
+    protected virtual void Start()
+    {
+        m_rigidbody = GetComponent<Rigidbody>();
+    }
+
+    public void Move(Vector3 horizontalForce, Vector3 verticalForce)
+    {
+        Vector3 totalForce = horizontalForce + verticalForce;
+        m_rigidbody.AddForce(totalForce);
+    }
+
+    // Change ship shape
+    public void ShapeShift(ShipShape newShape)
 	{
 		m_currentShape = newShape;
 
