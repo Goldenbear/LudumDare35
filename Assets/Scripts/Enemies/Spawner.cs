@@ -7,18 +7,17 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField, Tooltip("Prefab of the ship to spawn")]
+    [SerializeField, Tooltip("Prefab of the enemy to spawn")]
     GameObject enemyPrefab;
 
-    [SerializeField, Tooltip("Number of ships to spawn")]
-    int numEnemies;
+    [SerializeField, Tooltip("Number of enemies to spawn")]
+    protected int numEnemies;
 
     [SerializeField, Tooltip("Seconds between spawn times")]
-    float spawnTime;
+    protected float spawnTime;
 
-    int enemiesSpawned = 0;
+    protected int enemiesSpawned = 0;
 
-    // Use this for initialization
     void Start()
     {
         if (enemyPrefab == null)
@@ -29,15 +28,24 @@ public class Spawner : MonoBehaviour
         this.StartCoroutine(Spawn());
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (IsSpawnComplete()) Destroy(this.gameObject);
+        if (IsSpawnComplete()) RemoveSpawner();
+    }
+
+    protected void RemoveSpawner()
+    {
+        Destroy(this.gameObject);
     }
 
     protected Enemy SpawnEnemy()
     {
-        Enemy e = (Instantiate(enemyPrefab, transform.position, transform.rotation) as GameObject).GetComponent<Enemy>();
+        return SpawnEnemy(transform.position, transform.rotation);
+    }
+
+    protected Enemy SpawnEnemy(Vector3 spawnPoint, Quaternion rotation = new Quaternion())
+    {
+        Enemy e = (Instantiate(enemyPrefab, spawnPoint, rotation) as GameObject).GetComponent<Enemy>();
         enemiesSpawned++;
         return e;
     }
