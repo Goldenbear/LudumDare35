@@ -40,8 +40,12 @@ public abstract class Weapon : MonoBehaviour
 
     public void StartFiring()
     {
+		if(!isFiring)
+		{
+			
         StartFireRoutine();
         isFiring = true;
+		}
     }
 
     public void StopFiring()
