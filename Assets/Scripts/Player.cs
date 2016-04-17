@@ -15,13 +15,18 @@ public class Player : Ship
 	public int m_playerNumber = 0;
 	public int m_score = 0;
 	public Text m_scoreUIText;
+	public Image m_healthUIBar;
 
-	
+	// Private members
+	private float m_healthBarOriginalWidth;
 
 	// Use this for initialization
 	protected override void Start() 
 	{
         base.Start();
+
+		if(m_healthUIBar != null)
+			m_healthBarOriginalWidth = m_healthUIBar.rectTransform.sizeDelta.x;
 	}
 	
 	// Update is called once per frame
@@ -29,8 +34,7 @@ public class Player : Ship
 	{
 		PlayerControls();
 
-		if(m_scoreUIText != null)
-			m_scoreUIText.text = string.Format("{0:00000000}", m_score);
+		UpdateHUD();
 	}
 
 	// Face ship in this direction
@@ -98,6 +102,20 @@ public class Player : Ship
 		{
 			ShapeShift(ShipShape.k_cross);
 			Debug.Log(prefix+"Fire4");
+		}
+	}
+
+	// Update player's HUD
+	void UpdateHUD()
+	{
+		if(m_scoreUIText != null)
+			m_scoreUIText.text = string.Format("{0:00000000}", m_score);
+
+		if(m_healthUIBar != null)
+		{
+			Vector2 size = m_healthUIBar.rectTransform.sizeDelta;
+			size.x = m_healthBarOriginalWidth * m_health / 100.0f;
+			m_healthUIBar.rectTransform.sizeDelta = size;
 		}
 	}
 }
