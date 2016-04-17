@@ -17,9 +17,20 @@ public class Ship : MonoBehaviour
 	}
 
 	// Public members
+	public int m_health = 100;
 	public ShipShape m_currentShape = ShipShape.k_square;
 	public int m_points = 100;
 	private Gun m_gun;
+
+	// Take a hit
+	public void Hit(int damage=1)
+	{
+		m_health -= damage;
+		if(m_health <= 0)
+		{
+			// Die
+		}
+	}
 
     // Private members
     private Rigidbody m_rigidbody;
