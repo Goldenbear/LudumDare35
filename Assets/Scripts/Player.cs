@@ -38,8 +38,13 @@ public class Player : Ship
 		string prefix = "P"+(m_playerNumber+1);
 		float xAxisL = Input.GetAxis(prefix+"HorizontalL");
 		float yAxisL = Input.GetAxis(prefix+"VerticalL");
+#if UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX
+		float xAxisR = Input.GetAxis(prefix+"HorizontalR_OSX");
+		float yAxisR = Input.GetAxis(prefix+"VerticalR_OSX");
+#else
 		float xAxisR = Input.GetAxis(prefix+"HorizontalR");
 		float yAxisR = Input.GetAxis(prefix+"VerticalR");
+#endif
 		Vector3 moveDir = new Vector3(xAxisL, -yAxisL, 0.0f);
 		Vector3 fireDir = new Vector3(xAxisR, -yAxisR, 0.0f);
 
