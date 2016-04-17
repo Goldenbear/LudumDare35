@@ -24,7 +24,7 @@ public class Gun : Weapon
 	public void ProjectileHit(Projectile proj, Ship target)
 	{
 		// Hit target
-		target.Hit(1);
+		target.Hit(15);
 
 		// Award points for kill to player that shot the gun ONLY if we didnt shoot ourselves!
 		Player player = AttachedToShip as Player;
