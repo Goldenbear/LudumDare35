@@ -23,11 +23,14 @@ public class Ship : MonoBehaviour
 
 	// Public members
 	public int m_health = 100;
+	public ShipShape m_oldShape = ShipShape.k_square;
 	public ShipShape m_currentShape = ShipShape.k_square;
 	public int m_points = 100;
 	private Gun m_gun;
 
 	public Rigidbody ShipBody {get{ return m_rigidbody; }}
+	// Manually assign this guy
+	public Animator anim;
 
 	// Take a hit
 	public void Hit(int damage=1)
@@ -58,10 +61,23 @@ public class Ship : MonoBehaviour
 				m_shapes[(int)shape] = shapeT.gameObject;
 		}
     }
+		
+	// Face ship in this direction
+	protected void FaceDirection(Vector3 desiredDir, float turnSpeed=-1)
+	{
+		Quaternion qCurrent = transform.rotation;
+		Quaternion qDesired = Quaternion.LookRotation(Vector3.forward, desiredDir);
+
+		if(turnSpeed > 0.0f)
+			transform.rotation = Quaternion.RotateTowards(qCurrent, qDesired, turnSpeed * Time.deltaTime);
+		else
+			transform.rotation = qDesired;
+	}
 
     public void SetVelocity(Vector3 newVelocity)
     {
         m_rigidbody.velocity = newVelocity;
+		FaceDirection(newVelocity.normalized);
     }
 
     public void Move(Vector3 horizontalForce, Vector3 verticalForce)
@@ -70,15 +86,30 @@ public class Ship : MonoBehaviour
         m_rigidbody.AddForce(totalForce);
     }
 
+	public void ShapeShift(ShipShape newShape)
+	{
+		// If already this shape do nothing
+		if(newShape == m_currentShape)
+			return;
+		
+		// If a shift is already pending dont trigger another one
+		if(m_currentShape != m_oldShape)
+			return;
+		
+		m_oldShape = m_currentShape;
+		m_currentShape = newShape;
+		anim.SetTrigger("changeShape");
+	}
+
     // Change ship shape
-    public void ShapeShift(ShipShape newShape)
+	public void ShapeShiftNow()
 	{
 		// Deactivate previous shape and activate new shape
-		m_shapes[(int)m_currentShape].SetActive(false);
-
-		m_currentShape = newShape;
-
+		m_shapes[(int)m_oldShape].SetActive(false);
 		m_shapes[(int)m_currentShape].SetActive(true);
+
+		// Set old shape to current to signify we have shifted
+		m_oldShape = m_currentShape;
 
 		// Get new active gun
 		m_gun = GetComponentInChildren<Gun>();
