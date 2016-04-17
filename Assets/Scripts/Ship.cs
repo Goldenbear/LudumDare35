@@ -5,28 +5,35 @@ using System.Collections;
 /// Abstract base class for all ships.
 /// </summary>
 [RequireComponent(typeof(Rigidbody))]
-public class Ship : MonoBehaviour 
+public class Ship : MonoBehaviour
 {
-	// What ship shape is a shape shifting ship if the ship's shape shifts
-	public enum ShipShape
-	{
-		k_square,
-		k_circle,
-		k_triangle,
-		k_cross
-	}
+    // What ship shape is a shape shifting ship if the ship's shape shifts
+    public enum ShipShape
+    {
+        k_square,
+        k_circle,
+        k_triangle,
+        k_cross
+    }
 
-	// Public members
-	public ShipShape m_currentShape = ShipShape.k_square;
-	public int m_points = 100;
-	private Gun m_gun;
+    // Public members
+    public ShipShape m_currentShape = ShipShape.k_square;
+    public int m_points = 100;
+    private Gun m_gun;
 
     // Private members
     private Rigidbody m_rigidbody;
 
+    public Rigidbody ShipBody {get{ return m_rigidbody; }}
+
     protected virtual void Start()
     {
-        m_rigidbody = GetComponent<Rigidbody>();
+        
+    }
+
+    public void SetVelocity(Vector3 newVelocity)
+    {
+        m_rigidbody.velocity = newVelocity;
     }
 
     public void Move(Vector3 horizontalForce, Vector3 verticalForce)
@@ -66,7 +73,9 @@ public class Ship : MonoBehaviour
 		// Get active gun
 		m_gun = GetComponentInChildren<Gun>();
 		m_gun.AttachedToShip = this;
-	}
+
+        m_rigidbody = GetComponent<Rigidbody>();
+    }
 	
 	// Update is called once per frame
 	void Update () 
