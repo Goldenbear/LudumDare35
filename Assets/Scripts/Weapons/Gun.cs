@@ -64,8 +64,8 @@ public class Gun : Weapon
 
         if(targets.Length > 0)
         {
-            int idx = Random.Range(0,targets.Length - 1);
-            targetPlayer = targets[1];
+            int idx = Random.Range(0,targets.Length);
+            targetPlayer = targets[idx];
         }
         else
         {
