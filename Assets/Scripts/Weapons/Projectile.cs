@@ -59,8 +59,14 @@ public class Projectile : MonoBehaviour {
         // Nothing in the base for now
     }
 
+
     void OnTriggerEnter(Collider otherCollider)
     {
+
+		if(otherCollider.tag == "Wall")
+		{
+			Destroy(gameObject);
+		}
         // If projectile hit a ship then notify the gun that fired us
         Ship otherShip = otherCollider.gameObject.GetComponent<Ship>();
 
