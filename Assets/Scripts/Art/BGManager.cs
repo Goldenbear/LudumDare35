@@ -6,9 +6,9 @@ public class BGManager : MonoBehaviour {
 
 	private List<Transform> players = new List<Transform>();
 
-	private Vector2 addedDirection;
+	public Vector2 addedDirection {get; set;}
 	private Renderer BGMat;
-	private Vector2 newOffset;
+	public Vector2 newOffset {get; set;}
 	private Vector2 currOffset;
 
 	public float maxSpeed;
