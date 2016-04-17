@@ -1,20 +1,11 @@
 ﻿
-using System;
 using System.Collections;
 using UnityEngine;
 
 public class Gun : Weapon
 {
     private PlayerAudioManger pam;
-    void Start()
-    {
-        if (AttachedToShip is Player)
-        {
-            Debug.Log("Ship Shape!");
-            pam = AttachedToShip.Pam;
-        }
-    }
-
+    
     [SerializeField, Tooltip("Initial speed of the projectile")]
     protected float initialSpeed;
     
@@ -24,6 +15,7 @@ public class Gun : Weapon
     protected Vector3 fireDirection;
 
 	public Ship AttachedToShip {get; set;}
+    private Ship targetPlayer;
 
 	public Vector3 FireDirection
 	{
@@ -31,7 +23,21 @@ public class Gun : Weapon
 		set { fireDirection = value; }
 	}
 
-	public void ProjectileHit(Projectile proj, Ship target)
+    void Start()
+    {
+        if (AttachedToShip is Player)
+        {
+            Debug.Log("Ship Shape!");
+            pam = AttachedToShip.Pam;
+        }
+
+        if (fireAtEnemy)
+        {
+            AcquireNewTarget();
+        }
+    }
+
+    public void ProjectileHit(Projectile proj, Ship target)
 	{
 		// Hit target
 		target.Hit(15);
@@ -47,6 +53,21 @@ public class Gun : Weapon
         Projectile proj = CreateProjectile();
         proj.SetInitialVelocity(GetAimDirection() * initialSpeed);
         yield return null;
+    }
+
+    protected void AcquireNewTarget()
+    {
+        Player[] targets = LevelManager.Get.Players;
+
+        if(targets.Length > 0)
+        {
+            int idx = Random.Range(0,targets.Length - 1);
+            targetPlayer = targets[1];
+        }
+        else
+        {
+            Debug.LogWarning("No targets to choose from");
+        }
     }
 
     protected Projectile CreateProjectile()
@@ -65,10 +86,9 @@ public class Gun : Weapon
 
     protected Vector3 GetAimDirection()
     {
-        if(fireAtEnemy)
+        if(fireAtEnemy && targetPlayer != null)
         {
-            // TODO: Find a target
-            return new Vector3(1, 0, 0);
+            return (targetPlayer.transform.position - this.transform.position).normalized;
         }
         else
         {
