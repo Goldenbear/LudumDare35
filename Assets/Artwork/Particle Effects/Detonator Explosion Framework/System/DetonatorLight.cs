@@ -21,6 +21,7 @@ public class DetonatorLight : DetonatorComponent {
 		_light.transform.localPosition = localPosition;
 		_lightComponent = (Light)_light.AddComponent <Light>();
 		_lightComponent.type = LightType.Point;
+        _lightComponent.shadows = LightShadows.Soft;
 		_lightComponent.enabled = false;
 	}
 	
@@ -31,7 +32,7 @@ public class DetonatorLight : DetonatorComponent {
 		if ((_explodeTime + _scaledDuration > Time.time) && _lightComponent.intensity > 0f)
 		{
 			_reduceAmount = intensity * (Time.deltaTime/_scaledDuration);
-			_lightComponent.intensity -= _reduceAmount;
+			_lightComponent.intensity -= _reduceAmount * 3.0f;
 		}
 		else
 		{
@@ -48,10 +49,10 @@ public class DetonatorLight : DetonatorComponent {
 		if (detailThreshold > detail) return;
 		
 		_lightComponent.color = color;
-		_lightComponent.range = size * 50f;	
+		_lightComponent.range = size * 100f;	
 		_scaledDuration = (duration * timeScale);
 		_lightComponent.enabled = true;
-		_lightComponent.intensity = intensity;
+		_lightComponent.intensity = intensity * 3.0f;
 		_explodeTime = Time.time;
 	}
 	

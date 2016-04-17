@@ -22,7 +22,9 @@ public class SplashMenu : MonoBehaviour
 		}
 
 		Image newImage = m_buttons[m_currentButton].GetComponent<Image>();
-		newImage.color = Color.white;
+		//newImage.color = Color.white;
+		Color col = new Color (1f,1f,1f, 0.2f);
+		newImage.color = col;
 	}
 	
 	// Update is called once per frame
@@ -90,26 +92,34 @@ public class SplashMenu : MonoBehaviour
 	private void MoveUp()
 	{
 		Image oldImage = m_buttons[m_currentButton].GetComponent<Image>();
-		oldImage.color = Color.grey;
+		//oldImage.color = Color.grey;
+		Color col2 = new Color (1f,1f,1f, 0f);
+		oldImage.color = col2;
 
 		m_currentButton--;
 		if(m_currentButton < 0)
 			m_currentButton = m_buttons.Length-1;
 
 		Image newImage = m_buttons[m_currentButton].GetComponent<Image>();
-		newImage.color = Color.white;
+		//newImage.color = Color.white;
+		Color col = new Color (1f,1f,1f, 0.2f);
+		newImage.color = col;
 	}
 
 	private void MoveDown()
 	{
 		Image oldImage = m_buttons[m_currentButton].GetComponent<Image>();
-		oldImage.color = Color.grey;
+		//oldImage.color = Color.grey;
+		Color col2 = new Color (1f,1f,1f, 0f);
+		oldImage.color = col2;
 
 		m_currentButton++;
 		if(m_currentButton >= m_buttons.Length)
 			m_currentButton = 0;
 
 		Image newImage = m_buttons[m_currentButton].GetComponent<Image>();
-		newImage.color = Color.white;
+		//newImage.color = Color.white;
+		Color col = new Color (1f,1f,1f, 0.2f);
+		newImage.color = col;
 	}
 }
