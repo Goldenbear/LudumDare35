@@ -27,8 +27,10 @@ public class Ship : MonoBehaviour
 	public ShipShape m_currentShape = ShipShape.k_square;
 	public int m_points = 100;
 	private Gun m_gun;
+    private PlayerAudioManger m_pam;
 
 	public Rigidbody ShipBody {get{ return m_rigidbody; }}
+    public PlayerAudioManger Pam { get { return m_pam; } }
 	// Manually assign this guy
 	public Animator anim;
 
@@ -36,6 +38,12 @@ public class Ship : MonoBehaviour
 	public void Hit(int damage=1)
 	{
 		m_health -= damage;
+
+        if(m_pam != null)
+        {
+            m_pam.PlayerHitSound();
+        }
+        
 		if(m_health <= 0)
 		{
             // Let whoever is controlling the ship handle cleanup
@@ -142,6 +150,7 @@ public class Ship : MonoBehaviour
         }
 
         m_rigidbody = GetComponent<Rigidbody>();
+        m_pam = GetComponent<PlayerAudioManger>();
     }
 	
 	// Update is called once per frame
