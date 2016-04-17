@@ -15,8 +15,10 @@ public class BurstGun : Gun
         for(int i = 1; i <= burstNum; i++)
         {
             Projectile proj = CreateProjectile();
-
-            proj.SetInitialVelocity(GetAimDirection() * initialSpeed);
+            if(proj != null)
+            {
+                proj.SetInitialVelocity(GetAimDirection() * initialSpeed);
+            }
 
             yield return new WaitForSeconds(burstTime);
         }
