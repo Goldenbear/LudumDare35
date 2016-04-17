@@ -79,6 +79,9 @@ public class Projectile : MonoBehaviour {
                 FiredFromGun.ProjectileHit(this, otherShip);
             }
         }
+
+		// Once a projectile hits something it should disappear
+		Destroy(gameObject);
     }
 
     /// <summary>
