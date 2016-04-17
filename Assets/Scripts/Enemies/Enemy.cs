@@ -11,7 +11,6 @@ public class Enemy : MonoBehaviour
     enum AttackInstinct
     {
         None = -1,
-        Immediate,
         OnScreen,
         Delayed
     }
@@ -68,11 +67,6 @@ public class Enemy : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        if (attack == AttackInstinct.Immediate && mainTurret != null)
-        {
-            mainTurret.StartFiring();
-        }
-
         this.StartCoroutine(Move());
     }
     

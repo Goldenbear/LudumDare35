@@ -27,7 +27,6 @@ public class Gun : Weapon
     {
         if (AttachedToShip is Player)
         {
-            Debug.Log("Ship Shape!");
             pam = AttachedToShip.Pam;
         }
 
@@ -51,7 +50,11 @@ public class Gun : Weapon
     public override IEnumerator Fire()
     {
         Projectile proj = CreateProjectile();
-        proj.SetInitialVelocity(GetAimDirection() * initialSpeed);
+        if(proj != null)
+        {
+            proj.SetInitialVelocity(GetAimDirection() * initialSpeed);
+        }
+        
         yield return null;
     }
 
@@ -72,13 +75,17 @@ public class Gun : Weapon
 
     protected Projectile CreateProjectile()
     {
-        Projectile p = (Instantiate(ProjectilePrefab, transform.position, transform.rotation) as GameObject).GetComponent<Projectile>();
-        p.FiredFromGun = this;
-
-        if (AttachedToShip is Player)
+        Projectile p = null;
+        if(IsPointVisible(transform.position))
         {
-            //Debug.Log("Pew Pew");            
-            pam.PlayBulletSound();
+            p = (Instantiate(ProjectilePrefab, transform.position, transform.rotation) as GameObject).GetComponent<Projectile>();
+            p.FiredFromGun = this;
+
+            if (AttachedToShip is Player)
+            {
+                //Debug.Log("Pew Pew");
+                pam.PlayBulletSound();
+            }
         }
 
         return p;
@@ -94,5 +101,12 @@ public class Gun : Weapon
         {
             return fireDirection.normalized;
         }
+    }
+
+    bool IsPointVisible(Vector3 point)
+    {
+        Bounds b = new Bounds(point, new Vector3(.1f, .1f, .1f));
+        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
+        return GeometryUtility.TestPlanesAABB(planes, b);
     }
 }

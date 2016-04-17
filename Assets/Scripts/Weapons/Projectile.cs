@@ -25,6 +25,7 @@ public class Projectile : MonoBehaviour {
     Vector3 initialVelocity;
 
     Rigidbody rb;
+    Renderer r;
 
 	public Gun FiredFromGun {get; set;}		// Who shot this projectile so we can notify them of hits
 
@@ -32,6 +33,7 @@ public class Projectile : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
         rb = GetComponent<Rigidbody>();
+        r = GetComponentInChildren<Renderer>();
 	}
 
     void Start()
@@ -41,7 +43,6 @@ public class Projectile : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
         elapsedLife += Time.deltaTime;
         if(elapsedLife >= LifeTime)
         {
@@ -104,6 +105,7 @@ public class Projectile : MonoBehaviour {
 
     void OnBecameInvisible()
     {
+        // TODO: Why doesn't this work?
         Destroy(this.gameObject);
     }
 }
