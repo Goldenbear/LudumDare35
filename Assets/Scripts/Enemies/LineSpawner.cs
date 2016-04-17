@@ -123,4 +123,45 @@ public class LineSpawner : FormationSpawner
                 return new Vector3(thisPos.x, thisPos.y + offset);
         }
     }
+
+    protected override void OnDrawGizmosSelected()
+    {
+        base.OnDrawGizmosSelected();
+
+        Gizmos.color = Color.magenta;
+        Vector3 from, to;
+        float offset;
+        Vector3 thisPos = this.transform.position;
+
+        if(start == StartPoint.Center)
+        {
+            offset = formationSize / 2f;
+            if(orient == Orientation.Horizontal)
+            {
+                from = new Vector3(thisPos.x - offset, thisPos.y);
+                to = new Vector3(thisPos.x + offset, thisPos.y);
+            }
+            else
+            {
+                from = new Vector3(thisPos.x, thisPos.y - offset);
+                to = new Vector3(thisPos.x, thisPos.y + offset);
+            }
+        }
+        else
+        {
+            from = thisPos;
+            offset = (start == StartPoint.NegativeEnd) ? formationSize : -formationSize;
+
+            if (orient == Orientation.Horizontal)
+            {
+                to = new Vector3(thisPos.x + offset, thisPos.y);
+            }
+            else
+            {
+                to = new Vector3(thisPos.x, thisPos.y + offset);
+            }
+        }
+
+        Gizmos.DrawLine(from, to);
+    }
 }

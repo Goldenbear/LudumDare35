@@ -43,7 +43,7 @@ public class FormationSpawner : Spawner
         spawnPoints = newPoints;
     }
 
-    void OnDrawGizmosSelected()
+    protected virtual void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
 
@@ -54,7 +54,6 @@ public class FormationSpawner : Spawner
                 Gizmos.DrawWireSphere(v, 1);
             }
         }
-        
     }
 }
 

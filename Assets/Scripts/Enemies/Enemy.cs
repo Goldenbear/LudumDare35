@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Ship))]
 public class Enemy : MonoBehaviour
@@ -23,6 +24,11 @@ public class Enemy : MonoBehaviour
         Right,
         Random
     }
+
+    [Serializable]
+    public class DeathEvent : UnityEvent<Enemy> { }
+
+    public DeathEvent OnDeath = new DeathEvent();
 
     [SerializeField, Tooltip("The primary weapon this ship uses")]
     Weapon mainTurret;
@@ -49,11 +55,13 @@ public class Enemy : MonoBehaviour
     Vector3 initialVelocity;
     Coroutine moveRoutine;
     ExitStrategy exit;
+    
 
     void Awake()
     {
         theShip = GetComponent<Ship>();
         r = GetComponent<Renderer>();
+        initialVelocity = defaultMoveDirection;
     }
 
 	// Use this for initialization
@@ -63,8 +71,6 @@ public class Enemy : MonoBehaviour
         {
             mainTurret.StartFiring();
         }
-
-        initialVelocity = defaultMoveDirection;
 
         this.StartCoroutine(Move());
     }
@@ -206,6 +212,7 @@ public class Enemy : MonoBehaviour
 
     protected void RemoveEnemy()
     {
+        OnDeath.Invoke(this);
         Destroy(this.gameObject);
     }
 
