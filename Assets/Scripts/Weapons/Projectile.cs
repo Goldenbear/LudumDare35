@@ -1,16 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-//public enum ColourType
-//{
-//    None = -1,
-//    Blue,
-//    Yellow,
-//    Red,
-//    Green,
-//    Purple
-//}
-
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collider))]
 public class Projectile : MonoBehaviour {
@@ -74,7 +64,7 @@ public class Projectile : MonoBehaviour {
         // If projectile hit a ship then notify the gun that fired us
         Ship otherShip = otherCollider.gameObject.GetComponent<Ship>();
 
-        if (otherShip != null && FiredFromGun.AttachedToShip != null)
+        if (otherShip != null && FiredFromGun != null && FiredFromGun.AttachedToShip != null)
         {
             Ship originShip = FiredFromGun.AttachedToShip;
 
@@ -84,12 +74,9 @@ public class Projectile : MonoBehaviour {
 
             if (DoesProjectileHurtShip(otherShip.m_currentShape, this.type))
             {
-                if (FiredFromGun != null)
-                {
-                    //if (otherShip is Player) Debug.Log("Hit player with " + this.type);
-                    //if (FiredFromGun.AttachedToShip is Player) Debug.Log("Player hit " + otherShip.m_currentShape);
-                    FiredFromGun.ProjectileHit(this, otherShip);
-                }
+                //if (otherShip is Player) Debug.Log("Hit player with " + this.type);
+                //if (FiredFromGun.AttachedToShip is Player) Debug.Log("Player hit " + otherShip.m_currentShape);
+                FiredFromGun.ProjectileHit(this, otherShip);
             }
         }
     }

@@ -21,9 +21,9 @@ public class CentralAudioTerminal : MonoBehaviour
     //public bool loop = true;
 
     private float timer;
-    private float currentAudioClipLength;
-    private float nextAudioClipLength;
-    private float previousAudioClipLength;
+    private float currentClipLength;
+    private float nextClipLength;
+    private float previousClipLength;
 
     private int iterator;
     public bool gameOver = false;
@@ -34,11 +34,11 @@ public class CentralAudioTerminal : MonoBehaviour
         nextChannel = audioChannel[1];
 
         currentChannel.clip = intro;
-        currentAudioClipLength = currentChannel.clip.length;
+        currentClipLength = currentChannel.clip.length;
         currentClip = currentChannel.clip;
 
         nextChannel.clip = rampUp;
-        nextAudioClipLength = nextChannel.clip.length;
+        nextClipLength = nextChannel.clip.length;
         nextClip = currentChannel.clip;
     }
 
@@ -55,17 +55,17 @@ public class CentralAudioTerminal : MonoBehaviour
             // Increase timer with the time difference between this and the previous frame:
             timer += Time.deltaTime;
 
-            if (timer >= currentAudioClipLength)
+            if (timer >= currentClipLength)
             {
                 currentChannel.Stop();
                 nextChannel.Play();
-                currentAudioClipLength = nextAudioClipLength;
+                currentClipLength = nextClipLength;
                 timer = 0;
 
                 //JuggleChannels prev/current/next
                 previousChannel = currentChannel;
                 previousClip = currentClip;
-                previousAudioClipLength = currentAudioClipLength;
+                previousClipLength = previousClip.length;
                 
                 currentChannel = nextChannel;
                 currentClip = nextClip;
@@ -74,7 +74,7 @@ public class CentralAudioTerminal : MonoBehaviour
                 nextChannel = previousChannel;
                 SetNextClip();
                 nextChannel.clip = nextClip;
-                nextAudioClipLength = nextClip.length;
+                nextClipLength = nextClip.length;
             }
         }
 
