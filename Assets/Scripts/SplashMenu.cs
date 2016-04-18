@@ -39,7 +39,7 @@ public class SplashMenu : MonoBehaviour
 		// Move up/down menu items
 		float yAxisL = Input.GetAxis("P1VerticalL") + Input.GetAxis("P2VerticalL");
 
-		if(yAxisL < -0.5f)
+		if(yAxisL < -0.2f)
 		{
 			if(isAxisInNeutral)
 			{
@@ -48,7 +48,7 @@ public class SplashMenu : MonoBehaviour
 			}
 		}
 		else
-		if(yAxisL > 0.5f)
+		if(yAxisL > 0.2f)
 		{
 			if(isAxisInNeutral)
 			{
