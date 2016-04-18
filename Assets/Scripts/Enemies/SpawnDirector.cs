@@ -14,6 +14,7 @@ public class SpawnDirector : MonoBehaviour
     List<Enemy> spawnedEnemies = new List<Enemy>();
     Spawner previousSpawner;
     Spawner nextSpawner;
+    float currentDelay;
 
     public bool IsComplete { get { return spawnOrder.Count == 0 && previousSpawner == null && nextSpawner == null; } }
 
@@ -33,6 +34,7 @@ public class SpawnDirector : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
+        currentDelay += Time.deltaTime;
         if(IsComplete)
         {
             // TODO: Destroy?
@@ -69,6 +71,7 @@ public class SpawnDirector : MonoBehaviour
 
     void StartNextSpawner()
     {
+        currentDelay = 0f;
         if (nextSpawner != null && !nextSpawner.IsSpawning)
         {
             nextSpawner.OnEnemySpawned.AddListener(OnEnemySpawned);
@@ -87,6 +90,8 @@ public class SpawnDirector : MonoBehaviour
                 return (HasPreviousStartedSpawning() && spawnedEnemies.Count == 0);
             case Spawner.StartTrigger.PreviousSpawnComplete:
                 return previousSpawner == null;
+            case Spawner.StartTrigger.TimeDelay:
+                return currentDelay > nextSpawner.startDelay;
             case Spawner.StartTrigger.Immediate:
             default:
                 return true;

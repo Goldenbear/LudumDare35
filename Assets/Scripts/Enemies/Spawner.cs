@@ -50,7 +50,7 @@ public class Spawner : MonoBehaviour
     protected StartTrigger startTrigger;
 
     [SerializeField, Tooltip("")]
-    protected float startDelay;
+    public float startDelay;
 
     protected int enemiesSpawned = 0;
 
