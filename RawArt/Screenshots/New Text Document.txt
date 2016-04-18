@@ -1,0 +1,14 @@
+Ship Shape
+
+Shoot ship shapes swiftly as a shape shifting ship, with shape shots, slaughtering the sly ship shapes who subtly scheme sabotage squandering ship chivalry.
+
+Your Shape/Color is immune to all bullets of the same color, but be careful enimies are immune to their color as well.
+
+Survive as long as possible to beat your previous scores or compete with friends for top of the leaderboard!
+
+2 Players supported but needs 2 gamepads
+
+Controls :
+Move: wasd  -or- Left Joystick 
+Shoot: ijkl  -or- Right Joystick
+Shape Shift: cvbn  -or-  Face buttons 
