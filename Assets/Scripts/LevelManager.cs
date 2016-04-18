@@ -79,7 +79,7 @@ public class LevelManager : MonoBehaviour
 
 		// Deactivate unwanted players
 		for(int i=0; i<m_players.Length; i++)
-			if(i >= GameManager.Get.NumPlayers)
+			if(m_players[i].m_playerNumber >= GameManager.Get.NumPlayers)
 				m_players[i].Deactivate();
 
 		// Find UI elements
