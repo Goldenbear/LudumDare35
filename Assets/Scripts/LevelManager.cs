@@ -116,10 +116,10 @@ public class LevelManager : MonoBehaviour
 			{
 				int numPlayersDead = 0;
 
-				// Level is over when all players are dead
+				// Level is over when all players are dead or inactive
 				for(int i=0; i<m_players.Length; i++)
 				{
-					if(m_players[i].m_health <= 0)
+					if((m_players[i].m_health <= 0) || !m_players[i].gameObject.activeInHierarchy)
 						numPlayersDead++;
 				}
 
@@ -160,7 +160,8 @@ public class LevelManager : MonoBehaviour
 			case ELevelState.k_intro:
 			{
 				// Initialise level
-				GameManager.Get.Score = 0;
+				GameManager.Get.P1Score = 0;
+				GameManager.Get.P2Score = 0;
 
 				UpdateUI();
 
@@ -181,18 +182,16 @@ public class LevelManager : MonoBehaviour
 			break;
 
 			case ELevelState.k_gameover:
-			{
+			{	
+				// Pass scores to GameManager so they can be inserted into the leaderboard
+				GameManager.Get.P1Score = m_players[0].m_score;
+				GameManager.Get.P2Score = m_players[1].m_score;
+
 				//?
 				m_gameOverSound.Play(m_gameOverSource);
 
 				if(m_messageText != null)
 					m_messageText.text = "Game Over";
-
-				if(m_message2Text != null)
-				{
-					m_message2Text.text = "Press Enter \n Score: "+GameManager.Get.Score;
-					m_message2Text.text += "\n"+((GameManager.Get.Score > GameManager.Get.HighScore)?"New High Score!":"High Score: "+GameManager.Get.HighScore);
-				}
 			}
 			break;
 

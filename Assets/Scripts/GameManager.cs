@@ -7,12 +7,14 @@ using System.Collections.Generic;
 /// </summary>
 public class GameManager : MonoBehaviour 
 {
+	public const int k_numHighScores = 10;
+
 	// UI states
 	public enum EGameState
 	{
 		k_splash,
 		k_level,			
-		k_death
+		k_leaderboard
 	}
 
 	// Globals
@@ -44,18 +46,28 @@ public class GameManager : MonoBehaviour
 
 	// Private members
 	private EGameState m_gameState = EGameState.k_splash;
-	private int m_highScore = 0;
-	private int m_score = 0;
 	private int m_numPlayers = 2;
 	private int m_playerOneNumber = 1;
 	private int m_playerTwoNumber = 2;
+	private int[] m_highScores;
+	private string[] m_highNames;
+	private string m_p1Name = "AAA";
+	private string m_p2Name = "AAA";
+	private int m_p1Score = 0;
+	private int m_p2Score = 0;
+	private int m_p1HighIndex = -1;
+	private int m_p2HighIndex = -1;
 
 	// Public methods
-	public int Score { get { return m_score; } set { m_score = value; } }
-	public int HighScore { get { return m_highScore; } }
+	public int[] HighScores { get { return m_highScores; } }
+	public string[] HighNames { get { return m_highNames; } }
 	public int NumPlayers { get { return m_numPlayers; } }
 	public int PlayerOneNumber { get { return m_playerOneNumber; } }
 	public int PlayerTwoNumber { get { return m_playerTwoNumber; } }
+	public int P1Score { get { return m_p1Score; } set { m_p1Score = value; } }
+	public int P2Score { get { return m_p2Score; } set { m_p2Score = value; } }
+	public int P1Index { get { return m_p1HighIndex; } }
+	public int P2Index { get { return m_p2HighIndex; } }
 
 	public void GameStart(int numPlayers, int playerOneNumber=1, int playerTwoNumber=2)
 	{
@@ -67,14 +79,80 @@ public class GameManager : MonoBehaviour
 
 	public void GameOver()
 	{
-		// New high score?
-		if(m_score > m_highScore)
+		// New high scores?
+		if(m_p1Score > m_p2Score)
 		{
-			m_highScore = m_score;
-			PlayerPrefs.SetInt("Highscore", m_highScore);
+			m_p1HighIndex = AddScore(0, m_p1Score);
+			m_p2HighIndex = AddScore(1, m_p2Score);
+		}
+		else
+		{
+			m_p2HighIndex = AddScore(1, m_p2Score);
+			m_p1HighIndex = AddScore(0, m_p1Score);
 		}
 
-		StateChange(EGameState.k_splash);//k_death
+		StateChange(EGameState.k_leaderboard);
+	}
+
+	public void GameRestart()
+	{
+		StateChange(EGameState.k_splash);
+	}
+
+	public int AddScore(int playerNum, int score)
+	{
+		int insertIndex = -1;
+
+		for(int i=0; i<k_numHighScores; i++)
+		{
+			if(score > m_highScores[i])
+			{
+				insertIndex = i;
+				break;
+			}
+		}
+
+		if(insertIndex == -1)
+			return insertIndex;
+
+		// Shift scores up
+		for(int j=k_numHighScores-1; j>insertIndex; j--)
+		{
+			m_highScores[j] = m_highScores[j-1];
+			m_highNames[j] = m_highNames[j-1];
+		}
+
+		// Insert new score
+		m_highScores[insertIndex] = score;
+		m_highNames[insertIndex] = (playerNum == 0) ? m_p1Name : m_p2Name;
+
+		return insertIndex;
+	}
+
+	public void SetScoreName(int playerNum, string name, int scoreIndex)
+	{
+		m_highNames[scoreIndex] = name;
+
+		if(playerNum == 0)
+		{
+			m_p1Name = name;
+			PlayerPrefs.SetString("P1Name", m_p1Name);
+		}
+		else
+		{
+			m_p2Name = name;
+			PlayerPrefs.SetString("P2Name", m_p2Name);
+		}
+
+		// Save high score table
+		for(int i=0; i<k_numHighScores; i++)
+		{
+			if((m_highScores[i] > 0) && (m_highNames[i] != null))
+			{
+				PlayerPrefs.SetInt("HighScore"+i, m_highScores[i]);
+				PlayerPrefs.SetString("HighName"+i, m_highNames[i]);
+			}
+		}
 	}
 
 	// Private methods
@@ -97,8 +175,18 @@ public class GameManager : MonoBehaviour
 		DontDestroyOnLoad(g_instance.gameObject);
 		DontDestroyOnLoad(g_instance);
 
-		// Read high score
-		m_highScore = PlayerPrefs.GetInt("Highscore", m_highScore);
+		// Read high scores
+		m_highScores = new int[k_numHighScores];
+		m_highNames = new string[k_numHighScores];
+		for(int i=0; i<k_numHighScores; i++)
+		{
+			m_highScores[i] = PlayerPrefs.GetInt("HighScore"+i, 0);
+			m_highNames[i] = PlayerPrefs.GetString("HighName"+i, null);
+		}
+
+		// Read default player names
+		m_p1Name = PlayerPrefs.GetString("P1Name", m_p1Name);
+		m_p2Name = PlayerPrefs.GetString("P2Name", m_p2Name);
 
 		// Start state depends on which scene we started on
 		if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Splash")
@@ -128,7 +216,7 @@ public class GameManager : MonoBehaviour
 			}
 			break;
 			
-			case EGameState.k_death:
+			case EGameState.k_leaderboard:
 			{
 			}
 			break;
@@ -156,8 +244,9 @@ public class GameManager : MonoBehaviour
 			}
 			break;
 
-			case EGameState.k_death:
+			case EGameState.k_leaderboard:
 			{
+				UnityEngine.SceneManagement.SceneManager.LoadScene("Leaderboard");
 			}
 			break;
 		}
