@@ -66,6 +66,9 @@ public class LevelManager : MonoBehaviour
 	private AudioSource 			m_backgroundSource = null;
 	private AudioSource 			m_gameOverSource = null;
 
+    [SerializeField]
+    SpawnDirector activeDirector;
+
 	/// <summary>
 	/// Constructor
 	/// </summary>
@@ -103,6 +106,14 @@ public class LevelManager : MonoBehaviour
 		StateChange(ELevelState.k_intro);
 	}
 
+    void Start()
+    {
+        if(activeDirector == null)
+        {
+            ChooseNewDirector();
+        }
+    }
+
 	/// <summary>
 	/// Update level
 	/// </summary>
@@ -124,7 +135,7 @@ public class LevelManager : MonoBehaviour
 				// Level is over when all players are dead or inactive
 				for(int i=0; i<m_players.Length; i++)
 				{
-					if((m_players[i].m_health <= 0) || !m_players[i].gameObject.activeInHierarchy)
+					if((m_players[i].m_currentHealth <= 0) || !m_players[i].gameObject.activeInHierarchy)
 						numPlayersDead++;
 				}
 
@@ -138,6 +149,11 @@ public class LevelManager : MonoBehaviour
 				// Once intro has completed loop background sound
 				if(!m_backgroundSource.isPlaying)
 					m_backgroundSound.Play(m_backgroundSource);
+
+                if(activeDirector.IsComplete)
+                {
+                    ChooseNewDirector();
+                }
 			}
 			break;
 
@@ -228,4 +244,25 @@ public class LevelManager : MonoBehaviour
 			}
 		}
 	}
+
+    void ChooseNewDirector()
+    {
+        if(activeDirector != null)
+        {
+            Destroy(activeDirector.gameObject);
+        }
+
+        var d = new GameObject[] { JoshSpawnPrefab, SeanSpawnPrefab, SpencerSpawnPrefab, TomSpawnPrefab };
+        int index;
+
+        do
+        {
+            index = Random.Range(0, 4);
+        } while (d[index] == null);
+
+
+        Debug.LogFormat("<color=purple>Started Director:</color> {0}", d[index].name);
+        activeDirector = Instantiate<GameObject>(d[index]).GetComponent<SpawnDirector>();
+    }
+
 }

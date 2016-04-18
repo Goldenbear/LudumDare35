@@ -96,28 +96,28 @@ public class Player : Ship
 		if(Input.GetButtonDown(prefix+"Fire1"+suffix))
 		{
 			ShapeShift(ShipShape.k_cross);
-			Debug.Log(prefix+"Fire1");
+			//Debug.Log(prefix+"Fire1");
             pam.PlayShiftShapeSound();
 		}
 		else
 		if(Input.GetButtonDown(prefix+"Fire2"+suffix))
 		{
 			ShapeShift(ShipShape.k_circle);
-			Debug.Log(prefix+"Fire2");
+			//Debug.Log(prefix+"Fire2");
             pam.PlayShiftShapeSound();
 		}
 		else
 		if(Input.GetButtonDown(prefix+"Fire3"+suffix))
 		{
 			ShapeShift(ShipShape.k_square);
-			Debug.Log(prefix+"Fire3");
+			//Debug.Log(prefix+"Fire3");
             pam.PlayShiftShapeSound();
 		}
 		else
 		if(Input.GetButtonDown(prefix+"Fire4"+suffix))
 		{
 			ShapeShift(ShipShape.k_triangle);
-			Debug.Log(prefix+"Fire4");
+			//Debug.Log(prefix+"Fire4");
             pam.PlayShiftShapeSound();
 		}
 	}
@@ -131,7 +131,7 @@ public class Player : Ship
 		if(m_healthUIBar != null)
 		{
 			Vector2 size = m_healthUIBar.rectTransform.sizeDelta;
-			size.x = m_healthBarOriginalWidth * m_health / 100.0f;
+			size.x = m_healthBarOriginalWidth * m_currentHealth / startHealth;
 			m_healthUIBar.rectTransform.sizeDelta = size;
 		}
 	}
@@ -139,6 +139,7 @@ public class Player : Ship
 	// Death
 	void OnShipDeath(Ship deadShip)
 	{
+        UpdateHUD();
 		// Remove player from the scene (dont destroy as stuff like projectiles keeps references to the player)
 		gameObject.SetActive(false);
 	}

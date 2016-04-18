@@ -8,7 +8,6 @@ public class PyroManager : MonoBehaviour
 
     public void SpawnExplosion(int explosionType, Vector3 explosionPosition)
     {
-        Debug.Log("KABOOM");
         GameObject.Instantiate(Explosions[explosionType], explosionPosition, Quaternion.identity);
     }
 }

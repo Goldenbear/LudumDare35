@@ -21,8 +21,9 @@ public class Ship : MonoBehaviour
         k_cross		= 3
     }
 
-	// Public members
-	public int m_health = 100;
+    // Public members
+    public int startHealth;
+	public int m_currentHealth;
 	public ShipShape m_oldShape = ShipShape.k_square;
 	public ShipShape m_currentShape = ShipShape.k_square;
 	public int m_points = 100;
@@ -38,7 +39,7 @@ public class Ship : MonoBehaviour
 	// Take a hit
 	public void Hit(int damage=1)
 	{
-		m_health -= damage;
+		m_currentHealth -= damage;
 
         if(m_pam != null)
         {
@@ -47,21 +48,16 @@ public class Ship : MonoBehaviour
 
 		anim.SetTrigger("hit");
 
-		if(m_health <= 0)
+		if(m_currentHealth <= 0)
 		{
+            m_currentHealth = 0;
             // Let whoever is controlling the ship handle cleanup
             if(this is Player)
             {
-                Debug.Log("I AM A DEAD PLAYER!");
-                //Debug.Log(this.transform.position);
-                //instantiate Crazy Explosion
                 pyMan.SpawnExplosion((int)ExplosionType.PLAYER, this.gameObject.transform.position);
             }
             else
             {
-                Debug.Log("I AM A DEAD ENEMY!");
-                //Debug.Log(this.transform.position);
-                //instantiate regular explosion
                 pyMan.SpawnExplosion((int)ExplosionType.ENEMY, this.gameObject.transform.position);
             }
             OnShipDestroyed.Invoke(this);
@@ -75,6 +71,8 @@ public class Ship : MonoBehaviour
 
     protected virtual void Start()
 	{
+        m_currentHealth = startHealth;
+
 		// Find the shape gameobjects
 		m_shapes = new GameObject[Enum.GetValues(typeof(ShipShape)).Length];
 		foreach(ShipShape shape in Enum.GetValues(typeof(ShipShape)))

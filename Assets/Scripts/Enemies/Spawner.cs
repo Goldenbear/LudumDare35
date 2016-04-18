@@ -13,6 +13,7 @@ public class Spawner : MonoBehaviour
         Immediate,
         PreviousSpawnComplete,
         PreviousEnemiesDead,
+        TimeDelay
     }
 
     protected enum VelocitySet
@@ -48,6 +49,9 @@ public class Spawner : MonoBehaviour
     [SerializeField, Tooltip("What triggers the starting of this spawner")]
     protected StartTrigger startTrigger;
 
+    [SerializeField, Tooltip("")]
+    public float startDelay;
+
     protected int enemiesSpawned = 0;
 
     public bool IsSpawning { get { return enemiesSpawned > 0; } }
@@ -63,7 +67,9 @@ public class Spawner : MonoBehaviour
     {
         if (enemyPrefabs == null || enemyPrefabs.Count < 1)
         {
-            Debug.LogError("Spawner doesn't have enemy types");
+            Debug.LogWarning("Spawner doesn't have enemy types: " + this.name);
+            RemoveSpawner();
+            return;
         }
 
         this.StartCoroutine(Spawn());
@@ -111,6 +117,7 @@ public class Spawner : MonoBehaviour
     GameObject ChooseEnemyPrefab()
     {
         int index = UnityEngine.Random.Range(0, enemyPrefabs.Count);
+
         return enemyPrefabs[index];
     }
 
