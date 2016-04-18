@@ -14,7 +14,8 @@ public class Leaderboard : MonoBehaviour
 	// Private members
 	private int m_p1NameCharIndex = 0;
 	private int m_p2NameCharIndex = 0;
-	private bool isAxisInNeutral = true;
+	private bool isP1AxisInNeutral = true;
+	private bool isP2AxisInNeutral = true;
 
 	// Use this for initialization
 	void Start () 
@@ -22,8 +23,8 @@ public class Leaderboard : MonoBehaviour
 		// Set up leaderboard entries
 		for(int i=0; i<m_scores.Length; i++)
 		{
-			Text text = m_scores[i].GetComponent<Text>();
-			text.text = (i+1).ToString()+" "+GameManager.Get.HighNames[i]+" "+string.Format("{0:00000000}", GameManager.Get.HighScores[i]);
+			SetEntryName(m_scores[i], GameManager.Get.HighNames[i]);
+			SetEntryScore(m_scores[i], string.Format("{0:00000000}", GameManager.Get.HighScores[i]));
 		}
 
 		if(GameManager.Get.P1Index == -1)
@@ -33,6 +34,20 @@ public class Leaderboard : MonoBehaviour
 
 		if((m_p1NameCharIndex == 3) && (m_p2NameCharIndex == 3))
 			AllDone();
+	}
+
+	private void SetEntryScore(GameObject entryObj, string score)
+	{
+		GameObject scoreObj = entryObj.transform.Find("Score").gameObject;
+		Text text = scoreObj.GetComponent<Text>();
+		text.text = score;
+	}
+
+	private void SetEntryName(GameObject entryObj, string name)
+	{
+		GameObject scoreObj = entryObj.transform.Find("Name").gameObject;
+		Text text = scoreObj.GetComponent<Text>();
+		text.text = name;
 	}
 
 	private string ReplaceChar(string text, int index, char newChar)
@@ -61,9 +76,9 @@ public class Leaderboard : MonoBehaviour
 			{
 				float yAxisL = Input.GetAxis(prefix+"VerticalL");
 
-				if(yAxisL < -0.5f)
+				if(yAxisL < -0.2f)
 				{
-					if(isAxisInNeutral)
+					if(isP1AxisInNeutral)
 					{
 						string name = GameManager.Get.HighNames[GameManager.Get.P1Index];
 
@@ -73,13 +88,13 @@ public class Leaderboard : MonoBehaviour
 							GameManager.Get.SetScoreName(0, name, GameManager.Get.P1Index);
 						}
 
-						isAxisInNeutral = false;
+						isP1AxisInNeutral = false;
 					}
 				}
 				else
-				if(yAxisL > 0.5f)
+				if(yAxisL > 0.2f)
 				{
-					if(isAxisInNeutral)
+					if(isP1AxisInNeutral)
 					{
 						string name = GameManager.Get.HighNames[GameManager.Get.P1Index];
 
@@ -89,18 +104,21 @@ public class Leaderboard : MonoBehaviour
 							GameManager.Get.SetScoreName(0, name, GameManager.Get.P1Index);
 						}
 
-						isAxisInNeutral = false;
+						isP1AxisInNeutral = false;
 					}
 				}
 				else
 				{
-					isAxisInNeutral = true;
+					isP1AxisInNeutral = true;
 				}
 
-				Text text = m_scores[GameManager.Get.P1Index].GetComponent<Text>();
-				text.text = (GameManager.Get.P1Index+1).ToString()+" "+GameManager.Get.HighNames[GameManager.Get.P1Index]+" "+string.Format("{0:00000000}", GameManager.Get.HighScores[GameManager.Get.P1Index]);
-				if((Time.time % 1.0f) < 0.5f)
-					text.text = ReplaceChar(text.text, 2+m_p1NameCharIndex, '_');
+				// Update display name
+				SetEntryName(m_scores[GameManager.Get.P1Index], GameManager.Get.HighNames[GameManager.Get.P1Index]);
+				if((Time.time % 0.5f) < 0.25f)
+				{
+					string tempName = ReplaceChar(GameManager.Get.HighNames[GameManager.Get.P1Index], m_p1NameCharIndex, '_');
+					SetEntryName(m_scores[GameManager.Get.P1Index], tempName);
+				}
 			}
 
 			// Next letter
@@ -133,9 +151,9 @@ public class Leaderboard : MonoBehaviour
 			{
 				float yAxisL = Input.GetAxis(prefix+"VerticalL");
 
-				if(yAxisL < -0.5f)
+				if(yAxisL < -0.2f)
 				{
-					if(isAxisInNeutral)
+					if(isP2AxisInNeutral)
 					{
 						string name = GameManager.Get.HighNames[GameManager.Get.P2Index];
 
@@ -145,13 +163,13 @@ public class Leaderboard : MonoBehaviour
 							GameManager.Get.SetScoreName(1, name, GameManager.Get.P2Index);
 						}
 
-						isAxisInNeutral = false;
+						isP2AxisInNeutral = false;
 					}
 				}
 				else
-				if(yAxisL > 0.5f)
+				if(yAxisL > 0.2f)
 				{
-					if(isAxisInNeutral)
+					if(isP2AxisInNeutral)
 					{
 						string name = GameManager.Get.HighNames[GameManager.Get.P2Index];
 
@@ -161,18 +179,21 @@ public class Leaderboard : MonoBehaviour
 							GameManager.Get.SetScoreName(1, name, GameManager.Get.P2Index);
 						}
 
-						isAxisInNeutral = false;
+						isP2AxisInNeutral = false;
 					}
 				}
 				else
 				{
-					isAxisInNeutral = true;
+					isP2AxisInNeutral = true;
 				}
 
-				Text text = m_scores[GameManager.Get.P2Index].GetComponent<Text>();
-				text.text = (GameManager.Get.P2Index+1).ToString()+" "+GameManager.Get.HighNames[GameManager.Get.P2Index]+" "+string.Format("{0:00000000}", GameManager.Get.HighScores[GameManager.Get.P2Index]);
-				if((Time.time % 1.0f) < 0.5f)
-					text.text = ReplaceChar(text.text, 2+m_p2NameCharIndex, '_');
+				// Update display name
+				SetEntryName(m_scores[GameManager.Get.P2Index], GameManager.Get.HighNames[GameManager.Get.P2Index]);
+				if((Time.time % 0.5f) < 0.25f)
+				{
+					string tempName = ReplaceChar(GameManager.Get.HighNames[GameManager.Get.P2Index], m_p2NameCharIndex, '_');
+					SetEntryName(m_scores[GameManager.Get.P2Index], tempName);
+				}
 			}
 
 			// Next letter
