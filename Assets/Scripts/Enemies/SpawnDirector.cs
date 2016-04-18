@@ -16,6 +16,9 @@ public class SpawnDirector : MonoBehaviour
 
     void Awake()
     {
+        // TODO: This is happening twice?
+        Debug.Log("SpawnDirector " + this.name + " AWAKE");
+        spawnOrder = new List<Spawner>(GetComponentsInChildren<Spawner>());
         foreach(Spawner s in spawnOrder)
         {
             s.gameObject.SetActive(false);

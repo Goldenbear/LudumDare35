@@ -31,7 +31,11 @@ public class SpreadGun : BurstGun
         for (int i = 1; i <= burstNum; i++)
         {
             Projectile proj = CreateProjectile();
-            proj.SetInitialVelocity(aimDirection.normalized * initialSpeed);
+            if (proj != null)
+            {
+                proj.SetInitialVelocity(aimDirection.normalized * initialSpeed);
+            }
+
             if (burstTime > 0) yield return new WaitForSeconds(burstTime);
 
             // Update direction for next firing
