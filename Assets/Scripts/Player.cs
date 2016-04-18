@@ -60,7 +60,7 @@ public class Player : Ship
 	// Update controls from the appropriate input for this player
 	void PlayerControls() 
 	{
-		int playerNumber = (m_playerNumber == 0) ? GameManager.Get.PlayerOneNumber : GameManager.Get.PlayerTwoNumber;
+		int playerNumber = (m_playerNumber == 0) ? GameManager.Get.PlayerOneInputNumber : GameManager.Get.PlayerTwoInputNumber;
 		string prefix = "P"+playerNumber;
 #if UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX
 		string suffix = "_OSX";
