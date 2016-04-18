@@ -131,7 +131,7 @@ public class Player : Ship
 		if(m_healthUIBar != null)
 		{
 			Vector2 size = m_healthUIBar.rectTransform.sizeDelta;
-			size.x = m_healthBarOriginalWidth * m_health / 100.0f;
+			size.x = m_healthBarOriginalWidth * m_currentHealth / startHealth;
 			m_healthUIBar.rectTransform.sizeDelta = size;
 		}
 	}
