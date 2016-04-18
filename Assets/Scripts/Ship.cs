@@ -44,7 +44,10 @@ public class Ship : MonoBehaviour
         {
             m_pam.PlayerHitSound();
         }
-        
+		if(!(this is Player))
+		{
+			anim.SetTrigger("hit");
+		}
 		if(m_health <= 0)
 		{
             // Let whoever is controlling the ship handle cleanup
