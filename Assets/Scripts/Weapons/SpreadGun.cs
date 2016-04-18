@@ -12,6 +12,9 @@ public class SpreadGun : BurstGun
     [SerializeField, Tooltip("Direction in which to release the spread")]
     protected bool rotateClockwise;
 
+    [SerializeField, Tooltip("True if each burst should switch rotation")]
+    protected bool oscillateRotation;
+
     public override IEnumerator Fire()
     {
         BurstCheck();
@@ -23,6 +26,11 @@ public class SpreadGun : BurstGun
         {
             halfSpread *= -1f;
             spreadPerProjectile *= -1f;
+        }
+
+        if (oscillateRotation)
+        {
+            rotateClockwise = !rotateClockwise;
         }
 
         Vector3 aimDirection = GetAimDirection(); // This should be the center of our spread
