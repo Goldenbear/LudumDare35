@@ -8,6 +8,9 @@ public class SpawnDirector : MonoBehaviour
     [SerializeField, Tooltip("The list of spawners to use")]
     List<Spawner> spawnOrder;
 
+    [SerializeField, Tooltip("True if Spawner order is random")]
+    bool isOrderRandom;
+
     List<Enemy> spawnedEnemies = new List<Enemy>();
     Spawner previousSpawner;
     Spawner nextSpawner;
@@ -49,8 +52,15 @@ public class SpawnDirector : MonoBehaviour
         if (spawnOrder.Count > 0)
         {
             previousSpawner = nextSpawner;
-            nextSpawner = spawnOrder[0];
-            spawnOrder.RemoveAt(0);
+
+            int nextIndex = 0;
+            if(isOrderRandom)
+            {
+                nextIndex = Random.Range(0, spawnOrder.Count);
+            }
+
+            nextSpawner = spawnOrder[nextIndex];
+            spawnOrder.RemoveAt(nextIndex);
 
             if (IsNextSpawnerReadyToStart())
             {

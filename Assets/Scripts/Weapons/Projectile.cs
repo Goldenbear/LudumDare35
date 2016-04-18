@@ -25,7 +25,6 @@ public class Projectile : MonoBehaviour {
     Vector3 initialVelocity;
 
     Rigidbody rb;
-    Renderer r;
 
 	public Gun FiredFromGun {get; set;}		// Who shot this projectile so we can notify them of hits
 
@@ -33,7 +32,6 @@ public class Projectile : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
         rb = GetComponent<Rigidbody>();
-        r = GetComponentInChildren<Renderer>();
 	}
 
     void Start()
