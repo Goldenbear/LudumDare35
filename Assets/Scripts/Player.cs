@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 /// <summary>
 /// A Player ship and its controls
@@ -44,6 +45,8 @@ public class Player : Ship
 			m_healthBarOriginalWidth = m_healthUIBar.rectTransform.sizeDelta.x;
 
         pam = GetComponent<PlayerAudioManger>();
+
+		OnShipDestroyed.AddListener(OnShipDeath);
 	}
 	
 	// Update is called once per frame
@@ -131,5 +134,12 @@ public class Player : Ship
 			size.x = m_healthBarOriginalWidth * m_health / 100.0f;
 			m_healthUIBar.rectTransform.sizeDelta = size;
 		}
+	}
+
+	// Death
+	void OnShipDeath(Ship deadShip)
+	{
+		// Remove player from the scene (dont destroy as stuff like projectiles keeps references to the player)
+		gameObject.SetActive(false);
 	}
 }
