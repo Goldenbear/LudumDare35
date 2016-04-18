@@ -18,14 +18,17 @@ public class CircleSpawner : FormationSpawner
         List<Vector3> newPoints = new List<Vector3>();
         float degreesBetween = 360 / numEnemies;
         float radius = formationSize / 2;
+        Vector3 thisPos = this.transform.position;
 
         // TODO: Don't always start at the top
-        Vector3 nextSpawn = new Vector3(0,radius);
+        Vector3 nextSpawn = new Vector3(thisPos.x, thisPos.y + radius);
 
         while(newPoints.Count < numEnemies)
         {
             newPoints.Add(nextSpawn);
-            nextSpawn = Quaternion.AngleAxis(degreesBetween, Vector3.back) * nextSpawn;
+            Vector3 rotVec = nextSpawn - thisPos;
+            rotVec = Quaternion.Euler(0,0,degreesBetween) * rotVec;
+            nextSpawn = rotVec + thisPos;
         }
 
         if (order == SpawnOrder.InOrder)

@@ -28,7 +28,7 @@ public class Spawner : MonoBehaviour
     public EnemySpawnedEvent OnEnemySpawned = new EnemySpawnedEvent();
 
     [SerializeField, Tooltip("Prefab of the enemy to spawn")]
-    GameObject enemyPrefab;
+    List<GameObject> enemyPrefabs;
 
     [SerializeField, Tooltip("Number of enemies to spawn")]
     protected int numEnemies;
@@ -61,9 +61,9 @@ public class Spawner : MonoBehaviour
 
     void Start()
     {
-        if (enemyPrefab == null)
+        if (enemyPrefabs == null || enemyPrefabs.Count < 1)
         {
-            Debug.LogError("Gun does not have a ship object");
+            Debug.LogError("Spawner doesn't have enemy types");
         }
 
         this.StartCoroutine(Spawn());
@@ -86,7 +86,7 @@ public class Spawner : MonoBehaviour
 
     protected Enemy SpawnEnemy(Vector3 spawnPoint, Quaternion rotation = new Quaternion())
     {
-        Enemy e = (Instantiate(enemyPrefab, spawnPoint, rotation) as GameObject).GetComponent<Enemy>();
+        Enemy e = (Instantiate(ChooseEnemyPrefab(), spawnPoint, rotation) as GameObject).GetComponent<Enemy>();
         if(velocitySet == VelocitySet.Specified)
         {
             e.SetInitialVelocity(enemyInitialVelocity);
@@ -97,6 +97,12 @@ public class Spawner : MonoBehaviour
 
         OnEnemySpawned.Invoke(e);
         return e;
+    }
+
+    GameObject ChooseEnemyPrefab()
+    {
+        int index = UnityEngine.Random.Range(0, enemyPrefabs.Count);
+        return enemyPrefabs[index];
     }
 
     protected virtual IEnumerator Spawn()

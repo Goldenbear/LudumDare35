@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
 
     public enum ExitStrategy
     {
+        Straight,
         Top,
         Bottom,
         Left,
@@ -129,7 +130,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual IEnumerator MoveOnScreen()
     {
-        theShip.SetVelocity(initialVelocity * .5f);
+        // Nothing special
         yield break;
     }
 
@@ -140,6 +141,8 @@ public class Enemy : MonoBehaviour
 
         switch(exit)
         {
+            case ExitStrategy.Straight:
+                yield break;
             case ExitStrategy.Random:
                 exitVelocity = ChooseRandomExitVector(exitSpeed);
                 break;
