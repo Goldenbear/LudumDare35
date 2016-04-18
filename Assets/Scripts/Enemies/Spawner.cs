@@ -64,6 +64,8 @@ public class Spawner : MonoBehaviour
         if (enemyPrefabs == null || enemyPrefabs.Count < 1)
         {
             Debug.LogError("Spawner doesn't have enemy types");
+            RemoveSpawner();
+            return;
         }
 
         this.StartCoroutine(Spawn());
@@ -111,6 +113,7 @@ public class Spawner : MonoBehaviour
     GameObject ChooseEnemyPrefab()
     {
         int index = UnityEngine.Random.Range(0, enemyPrefabs.Count);
+
         return enemyPrefabs[index];
     }
 
