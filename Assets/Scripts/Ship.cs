@@ -12,6 +12,8 @@ public class Ship : MonoBehaviour
     public class ShipDestroyedEvent : UnityEvent<Ship> { }
     public ShipDestroyedEvent OnShipDestroyed = new Ship.ShipDestroyedEvent();
 
+    public PyroManager pyMan;
+
     // What ship shape is a shape shifting ship if the ship's shape keeps on shifting
     public enum ShipShape
     {
@@ -47,6 +49,16 @@ public class Ship : MonoBehaviour
 		if(m_health <= 0)
 		{
             // Let whoever is controlling the ship handle cleanup
+            if(this is Player)
+            {                
+                //instantiate Crazy Explosion
+                pyMan.SpawnExplosion((int)ExplosionType.PLAYER, this.transform.position);
+            }
+            else
+            {
+                //instantiate regular explosion
+                pyMan.SpawnExplosion((int)ExplosionType.ENEMY, this.transform.position);
+            }
             OnShipDestroyed.Invoke(this);
 		}
 	}
