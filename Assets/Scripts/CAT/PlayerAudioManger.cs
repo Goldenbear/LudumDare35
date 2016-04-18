@@ -21,7 +21,7 @@ public class PlayerAudioManger : MonoBehaviour
 
     public void PlayBulletSound()
     {        
-        audio.PlayOneShot(bulletShootSound);
+        audio.PlayOneShot(bulletShootSound, 0.35f);
     }
 
     public void PlayShiftShapeSound()
