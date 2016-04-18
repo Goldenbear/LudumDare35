@@ -10,9 +10,7 @@ using UnityEngine.Events;
 public class Ship : MonoBehaviour
 {
     public class ShipDestroyedEvent : UnityEvent<Ship> { }
-    public ShipDestroyedEvent OnShipDestroyed = new Ship.ShipDestroyedEvent();
-
-    public PyroManager pyMan;
+    public ShipDestroyedEvent OnShipDestroyed = new Ship.ShipDestroyedEvent();    
 
     // What ship shape is a shape shifting ship if the ship's shape keeps on shifting
     public enum ShipShape
@@ -30,6 +28,7 @@ public class Ship : MonoBehaviour
 	public int m_points = 100;
 	private Gun m_gun;
     private PlayerAudioManger m_pam;
+    private PyroManager pyMan;
 
 	public Rigidbody ShipBody {get{ return m_rigidbody; }}
     public PlayerAudioManger Pam { get { return m_pam; } }
@@ -50,14 +49,18 @@ public class Ship : MonoBehaviour
 		{
             // Let whoever is controlling the ship handle cleanup
             if(this is Player)
-            {                
+            {
+                Debug.Log("I AM A DEAD PLAYER!");
+                //Debug.Log(this.transform.position);
                 //instantiate Crazy Explosion
-                pyMan.SpawnExplosion((int)ExplosionType.PLAYER, this.transform.position);
+                pyMan.SpawnExplosion((int)ExplosionType.PLAYER, this.gameObject.transform.position);
             }
             else
             {
+                Debug.Log("I AM A DEAD ENEMY!");
+                //Debug.Log(this.transform.position);
                 //instantiate regular explosion
-                pyMan.SpawnExplosion((int)ExplosionType.ENEMY, this.transform.position);
+                pyMan.SpawnExplosion((int)ExplosionType.ENEMY, this.gameObject.transform.position);
             }
             OnShipDestroyed.Invoke(this);
 		}
@@ -80,6 +83,8 @@ public class Ship : MonoBehaviour
 			if(shapeT != null)
 				m_shapes[(int)shape] = shapeT.gameObject;
 		}
+
+        pyMan = GameObject.FindObjectOfType<PyroManager>();
     }
 		
 	// Face ship in this direction
