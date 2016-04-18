@@ -22,7 +22,7 @@ public class Ship : MonoBehaviour
     }
 
     // Public members
-    public int startHealth;
+    public int startHealth = 100;
 	public int m_currentHealth;
 	public ShipShape m_oldShape = ShipShape.k_square;
 	public ShipShape m_currentShape = ShipShape.k_square;
