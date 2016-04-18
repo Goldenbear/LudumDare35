@@ -1,0 +1,297 @@
+Initialize engine version: 5.3.4f1 (fdbb5133b820)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: AMD Radeon R9 200 Series (ID=0x679a)
+    Vendor:   ATI
+    VRAM:     3051 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\josh\Desktop\Organizational\CurrentProjects\HOME\Ludum35\Builds\Shipshape_1.0\Shipshape_1.0_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\josh\Desktop\Organizational\CurrentProjects\HOME\Ludum35\Builds\Shipshape_1.0\Shipshape_1.0_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\josh\Desktop\Organizational\CurrentProjects\HOME\Ludum35\Builds\Shipshape_1.0\Shipshape_1.0_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\josh\Desktop\Organizational\CurrentProjects\HOME\Ludum35\Builds\Shipshape_1.0\Shipshape_1.0_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\josh\Desktop\Organizational\CurrentProjects\HOME\Ludum35\Builds\Shipshape_1.0\Shipshape_1.0_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\josh\Desktop\Organizational\CurrentProjects\HOME\Ludum35\Builds\Shipshape_1.0\Shipshape_1.0_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\josh\Desktop\Organizational\CurrentProjects\HOME\Ludum35\Builds\Shipshape_1.0\Shipshape_1.0_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\josh\Desktop\Organizational\CurrentProjects\HOME\Ludum35\Builds\Shipshape_1.0\Shipshape_1.0_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\josh\Desktop\Organizational\CurrentProjects\HOME\Ludum35\Builds\Shipshape_1.0\Shipshape_1.0_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\josh\Desktop\Organizational\CurrentProjects\HOME\Ludum35\Builds\Shipshape_1.0\Shipshape_1.0_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+- Completed reload, in  0.060 seconds
+Platform assembly: C:\Users\josh\Desktop\Organizational\CurrentProjects\HOME\Ludum35\Builds\Shipshape_1.0\Shipshape_1.0_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\josh\Desktop\Organizational\CurrentProjects\HOME\Ludum35\Builds\Shipshape_1.0\Shipshape_1.0_Data\Managed\System.dll (this message is harmless)
+desktop: 1680x1050 60Hz; virtual: 5280x1080 at -1920,-30
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 0.667180 ms
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 3.582724 ms
+SpawnDirector SpawnManager AWAKE
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+
+Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 1031.
+Total: 0.679211 ms (FindLiveObjects: 0.065259 ms CreateObjectMapping: 0.041197 ms MarkObjects: 0.547963 ms  DeleteObjects: 0.024426 ms)
+
+<color=blue>Started Spawner:</color> Spawner Immediate
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+I AM A DEAD ENEMY!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+KABOOM
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Material:Internal_CreateWithShader (UnityEngine.Material,UnityEngine.Shader)
+  at UnityEngine.Material..ctor (UnityEngine.Shader shader) [0x00000] in <filename unknown>:0 
+  at Detonator.DefaultFireballAMaterial () [0x00000] in <filename unknown>:0 
+  at Detonator.FillDefaultMaterials () [0x00000] in <filename unknown>:0 
+  at Detonator.Awake () [0x00000] in <filename unknown>:0 
+UnityEngine.Object:INTERNAL_CALL_Internal_InstantiateSingle(Object, Vector3&, Quaternion&)
+UnityEngine.Object:Internal_InstantiateSingle(Object, Vector3, Quaternion)
+UnityEngine.Object:Instantiate(Object, Vector3, Quaternion)
+PyroManager:SpawnExplosion(Int32, Vector3)
+Ship:Hit(Int32)
+Gun:ProjectileHit(Projectile, Ship)
+Projectile:OnTriggerEnter(Collider)
+ 
+(Filename:  Line: -1)
+
+I AM A DEAD ENEMY!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+KABOOM
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Material:Internal_CreateWithShader (UnityEngine.Material,UnityEngine.Shader)
+  at UnityEngine.Material..ctor (UnityEngine.Shader shader) [0x00000] in <filename unknown>:0 
+  at Detonator.DefaultFireballAMaterial () [0x00000] in <filename unknown>:0 
+  at Detonator.FillDefaultMaterials () [0x00000] in <filename unknown>:0 
+  at Detonator.Awake () [0x00000] in <filename unknown>:0 
+UnityEngine.Object:INTERNAL_CALL_Internal_InstantiateSingle(Object, Vector3&, Quaternion&)
+UnityEngine.Object:Internal_InstantiateSingle(Object, Vector3, Quaternion)
+UnityEngine.Object:Instantiate(Object, Vector3, Quaternion)
+PyroManager:SpawnExplosion(Int32, Vector3)
+Ship:Hit(Int32)
+Gun:ProjectileHit(Projectile, Ship)
+Projectile:OnTriggerEnter(Collider)
+ 
+(Filename:  Line: -1)
+
+<color=blue>Started Spawner:</color> Spawner (1) PreviousSpawnComplete
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+<color=blue>Started Spawner:</color> Spawner (2) Immediate
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+I AM A DEAD ENEMY!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+KABOOM
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Material:Internal_CreateWithShader (UnityEngine.Material,UnityEngine.Shader)
+  at UnityEngine.Material..ctor (UnityEngine.Shader shader) [0x00000] in <filename unknown>:0 
+  at Detonator.DefaultFireballAMaterial () [0x00000] in <filename unknown>:0 
+  at Detonator.FillDefaultMaterials () [0x00000] in <filename unknown>:0 
+  at Detonator.Awake () [0x00000] in <filename unknown>:0 
+UnityEngine.Object:INTERNAL_CALL_Internal_InstantiateSingle(Object, Vector3&, Quaternion&)
+UnityEngine.Object:Internal_InstantiateSingle(Object, Vector3, Quaternion)
+UnityEngine.Object:Instantiate(Object, Vector3, Quaternion)
+PyroManager:SpawnExplosion(Int32, Vector3)
+Ship:Hit(Int32)
+Gun:ProjectileHit(Projectile, Ship)
+Projectile:OnTriggerEnter(Collider)
+ 
+(Filename:  Line: -1)
+
+I AM A DEAD ENEMY!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+KABOOM
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Material:Internal_CreateWithShader (UnityEngine.Material,UnityEngine.Shader)
+  at UnityEngine.Material..ctor (UnityEngine.Shader shader) [0x00000] in <filename unknown>:0 
+  at Detonator.DefaultFireballAMaterial () [0x00000] in <filename unknown>:0 
+  at Detonator.FillDefaultMaterials () [0x00000] in <filename unknown>:0 
+  at Detonator.Awake () [0x00000] in <filename unknown>:0 
+UnityEngine.Object:INTERNAL_CALL_Internal_InstantiateSingle(Object, Vector3&, Quaternion&)
+UnityEngine.Object:Internal_InstantiateSingle(Object, Vector3, Quaternion)
+UnityEngine.Object:Instantiate(Object, Vector3, Quaternion)
+PyroManager:SpawnExplosion(Int32, Vector3)
+Ship:Hit(Int32)
+Gun:ProjectileHit(Projectile, Ship)
+Projectile:OnTriggerEnter(Collider)
+ 
+(Filename:  Line: -1)
+
+I AM A DEAD ENEMY!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+KABOOM
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Material:Internal_CreateWithShader (UnityEngine.Material,UnityEngine.Shader)
+  at UnityEngine.Material..ctor (UnityEngine.Shader shader) [0x00000] in <filename unknown>:0 
+  at Detonator.DefaultFireballAMaterial () [0x00000] in <filename unknown>:0 
+  at Detonator.FillDefaultMaterials () [0x00000] in <filename unknown>:0 
+  at Detonator.Awake () [0x00000] in <filename unknown>:0 
+UnityEngine.Object:INTERNAL_CALL_Internal_InstantiateSingle(Object, Vector3&, Quaternion&)
+UnityEngine.Object:Internal_InstantiateSingle(Object, Vector3, Quaternion)
+UnityEngine.Object:Instantiate(Object, Vector3, Quaternion)
+PyroManager:SpawnExplosion(Int32, Vector3)
+Ship:Hit(Int32)
+Gun:ProjectileHit(Projectile, Ship)
+Projectile:OnTriggerEnter(Collider)
+ 
+(Filename:  Line: -1)
+
+I AM A DEAD ENEMY!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+KABOOM
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Material:Internal_CreateWithShader (UnityEngine.Material,UnityEngine.Shader)
+  at UnityEngine.Material..ctor (UnityEngine.Shader shader) [0x00000] in <filename unknown>:0 
+  at Detonator.DefaultFireballAMaterial () [0x00000] in <filename unknown>:0 
+  at Detonator.FillDefaultMaterials () [0x00000] in <filename unknown>:0 
+  at Detonator.Awake () [0x00000] in <filename unknown>:0 
+UnityEngine.Object:INTERNAL_CALL_Internal_InstantiateSingle(Object, Vector3&, Quaternion&)
+UnityEngine.Object:Internal_InstantiateSingle(Object, Vector3, Quaternion)
+UnityEngine.Object:Instantiate(Object, Vector3, Quaternion)
+PyroManager:SpawnExplosion(Int32, Vector3)
+Ship:Hit(Int32)
+Gun:ProjectileHit(Projectile, Ship)
+Projectile:OnTriggerEnter(Collider)
+ 
+(Filename:  Line: -1)
+
+I AM A DEAD PLAYER!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+KABOOM
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Material:Internal_CreateWithShader (UnityEngine.Material,UnityEngine.Shader)
+  at UnityEngine.Material..ctor (UnityEngine.Shader shader) [0x00000] in <filename unknown>:0 
+  at Detonator.DefaultFireballAMaterial () [0x00000] in <filename unknown>:0 
+  at Detonator.FillDefaultMaterials () [0x00000] in <filename unknown>:0 
+  at Detonator.Awake () [0x00000] in <filename unknown>:0 
+UnityEngine.Object:INTERNAL_CALL_Internal_InstantiateSingle(Object, Vector3&, Quaternion&)
+UnityEngine.Object:Internal_InstantiateSingle(Object, Vector3, Quaternion)
+UnityEngine.Object:Instantiate(Object, Vector3, Quaternion)
+PyroManager:SpawnExplosion(Int32, Vector3)
+Ship:Hit(Int32)
+Gun:ProjectileHit(Projectile, Ship)
+Projectile:OnTriggerEnter(Collider)
+ 
+(Filename:  Line: -1)
+
+I AM A DEAD PLAYER!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+KABOOM
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Material:Internal_CreateWithShader (UnityEngine.Material,UnityEngine.Shader)
+  at UnityEngine.Material..ctor (UnityEngine.Shader shader) [0x00000] in <filename unknown>:0 
+  at Detonator.DefaultFireballAMaterial () [0x00000] in <filename unknown>:0 
+  at Detonator.FillDefaultMaterials () [0x00000] in <filename unknown>:0 
+  at Detonator.Awake () [0x00000] in <filename unknown>:0 
+UnityEngine.Object:INTERNAL_CALL_Internal_InstantiateSingle(Object, Vector3&, Quaternion&)
+UnityEngine.Object:Internal_InstantiateSingle(Object, Vector3, Quaternion)
+UnityEngine.Object:Instantiate(Object, Vector3, Quaternion)
+PyroManager:SpawnExplosion(Int32, Vector3)
+Ship:Hit(Int32)
+Gun:ProjectileHit(Projectile, Ship)
+Projectile:OnTriggerEnter(Collider)
+ 
+(Filename:  Line: -1)
+
+I AM A DEAD PLAYER!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+KABOOM
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Material:Internal_CreateWithShader (UnityEngine.Material,UnityEngine.Shader)
+  at UnityEngine.Material..ctor (UnityEngine.Shader shader) [0x00000] in <filename unknown>:0 
+  at Detonator.DefaultFireballAMaterial () [0x00000] in <filename unknown>:0 
+  at Detonator.FillDefaultMaterials () [0x00000] in <filename unknown>:0 
+  at Detonator.Awake () [0x00000] in <filename unknown>:0 
+UnityEngine.Object:INTERNAL_CALL_Internal_InstantiateSingle(Object, Vector3&, Quaternion&)
+UnityEngine.Object:Internal_InstantiateSingle(Object, Vector3, Quaternion)
+UnityEngine.Object:Instantiate(Object, Vector3, Quaternion)
+PyroManager:SpawnExplosion(Int32, Vector3)
+Ship:Hit(Int32)
+Gun:ProjectileHit(Projectile, Ship)
+Projectile:OnTriggerEnter(Collider)
+ 
+(Filename:  Line: -1)
+
+I AM A DEAD PLAYER!
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+KABOOM
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Material:Internal_CreateWithShader (UnityEngine.Material,UnityEngine.Shader)
+  at UnityEngine.Material..ctor (UnityEngine.Shader shader) [0x00000] in <filename unknown>:0 
+  at Detonator.DefaultFireballAMaterial () [0x00000] in <filename unknown>:0 
+  at Detonator.FillDefaultMaterials () [0x00000] in <filename unknown>:0 
+  at Detonator.Awake () [0x00000] in <filename unknown>:0 
+UnityEngine.Object:INTERNAL_CALL_Internal_InstantiateSingle(Object, Vector3&, Quaternion&)
+UnityEngine.Object:Internal_InstantiateSingle(Object, Vector3, Quaternion)
+UnityEngine.Object:Instantiate(Object, Vector3, Quaternion)
+PyroManager:SpawnExplosion(Int32, Vector3)
+Ship:Hit(Int32)
+Gun:ProjectileHit(Projectile, Ship)
+Projectile:OnTriggerEnter(Collider)
+ 
+(Filename:  Line: -1)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 9.301520 ms
+
+Unloading 66 unused Assets to reduce memory usage. Loaded Objects now: 510.
+Total: 2.657056 ms (FindLiveObjects: 1.976021 ms CreateObjectMapping: 0.040103 ms MarkObjects: 0.366767 ms  DeleteObjects: 0.273070 ms)
+
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 39c -> priority: 1 
+  Thread -> id: 1df0 -> priority: 1 
