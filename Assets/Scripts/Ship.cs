@@ -49,19 +49,14 @@ public class Ship : MonoBehaviour
 
 		if(m_health <= 0)
 		{
+            m_health = 0;
             // Let whoever is controlling the ship handle cleanup
             if(this is Player)
             {
-                Debug.Log("I AM A DEAD PLAYER!");
-                //Debug.Log(this.transform.position);
-                //instantiate Crazy Explosion
                 pyMan.SpawnExplosion((int)ExplosionType.PLAYER, this.gameObject.transform.position);
             }
             else
             {
-                Debug.Log("I AM A DEAD ENEMY!");
-                //Debug.Log(this.transform.position);
-                //instantiate regular explosion
                 pyMan.SpawnExplosion((int)ExplosionType.ENEMY, this.gameObject.transform.position);
             }
             OnShipDestroyed.Invoke(this);

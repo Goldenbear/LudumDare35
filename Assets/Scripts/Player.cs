@@ -139,6 +139,7 @@ public class Player : Ship
 	// Death
 	void OnShipDeath(Ship deadShip)
 	{
+        UpdateHUD();
 		// Remove player from the scene (dont destroy as stuff like projectiles keeps references to the player)
 		gameObject.SetActive(false);
 	}
