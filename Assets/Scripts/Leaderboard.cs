@@ -69,7 +69,7 @@ public class Leaderboard : MonoBehaviour
 		// Edit P1 leaderboard name?
 		if(GameManager.Get.P1Index != -1)
 		{
-			string prefix = "P"+GameManager.Get.PlayerOneNumber;
+			string prefix = "P"+GameManager.Get.PlayerOneInputNumber;
 
 			// Edit a letter?
 			if(m_p1NameCharIndex < 3)
@@ -144,7 +144,7 @@ public class Leaderboard : MonoBehaviour
 		// Edit P2 leaderboard name?
 		if(GameManager.Get.P2Index != -1)
 		{
-			string prefix = "P"+GameManager.Get.PlayerTwoNumber;
+			string prefix = "P"+GameManager.Get.PlayerTwoInputNumber;
 
 			// Edit a letter?
 			if(m_p2NameCharIndex < 3)

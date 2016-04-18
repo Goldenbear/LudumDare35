@@ -91,6 +91,15 @@ public class Spawner : MonoBehaviour
         {
             e.SetInitialVelocity(enemyInitialVelocity);
         }
+        if(velocitySet == VelocitySet.Random)
+        {
+            Vector3 init = new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), 0);
+            if(init.magnitude > 1f)
+            {
+                init.Normalize();
+            }
+            e.SetInitialVelocity(init);
+        }
         e.SetExitStrategy(exit);
         
         enemiesSpawned++;

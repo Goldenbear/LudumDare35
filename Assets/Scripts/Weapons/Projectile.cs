@@ -81,6 +81,9 @@ public class Projectile : MonoBehaviour {
             if (otherShip == originShip)
                 return;
 
+            if (otherShip is Player && originShip is Player)
+                return;
+
             if (DoesProjectileHurtShip(otherShip.m_currentShape, this.type))
             {
                 // WE MADE IT
