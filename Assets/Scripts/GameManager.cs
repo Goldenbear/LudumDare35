@@ -47,8 +47,8 @@ public class GameManager : MonoBehaviour
 	// Private members
 	private EGameState m_gameState = EGameState.k_splash;
 	private int m_numPlayers = 2;
-	private int m_playerOneNumber = 1;
-	private int m_playerTwoNumber = 2;
+	private int m_playerOneInputNumber = 1;
+	private int m_playerTwoInputNumber = 2;
 	private int[] m_highScores;
 	private string[] m_highNames;
 	private string m_p1Name = "AAA";
@@ -62,18 +62,19 @@ public class GameManager : MonoBehaviour
 	public int[] HighScores { get { return m_highScores; } }
 	public string[] HighNames { get { return m_highNames; } }
 	public int NumPlayers { get { return m_numPlayers; } }
-	public int PlayerOneNumber { get { return m_playerOneNumber; } }
-	public int PlayerTwoNumber { get { return m_playerTwoNumber; } }
+	public int PlayerOneInputNumber { get { return m_playerOneInputNumber; } }
+	public int PlayerTwoInputNumber { get { return m_playerTwoInputNumber; } }
 	public int P1Score { get { return m_p1Score; } set { m_p1Score = value; } }
 	public int P2Score { get { return m_p2Score; } set { m_p2Score = value; } }
 	public int P1Index { get { return m_p1HighIndex; } }
 	public int P2Index { get { return m_p2HighIndex; } }
 
-	public void GameStart(int numPlayers, int playerOneNumber=1, int playerTwoNumber=2)
+	// Start game specifying which input is assigned to which player
+	public void GameStart(int numPlayers, int playerOneInputNumber=1, int playerTwoInputNumber=2)
 	{
 		m_numPlayers = numPlayers;
-		m_playerOneNumber = playerOneNumber;
-		m_playerTwoNumber = playerTwoNumber;
+		m_playerOneInputNumber = playerOneInputNumber;
+		m_playerTwoInputNumber = playerTwoInputNumber;
 		StateChange(EGameState.k_level);
 	}
 
