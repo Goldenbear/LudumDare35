@@ -42,9 +42,8 @@ public abstract class Weapon : MonoBehaviour
     {
 		if(!isFiring)
 		{
-			
-        StartFireRoutine();
-        isFiring = true;
+            StartFireRoutine();
+            isFiring = true;
 		}
     }
 
@@ -59,7 +58,6 @@ public abstract class Weapon : MonoBehaviour
 
     private void StartFireRoutine()
     {
-        if (firingCoroutine != null) this.StopCoroutine(firingCoroutine);
         firingCoroutine = this.StartCoroutine(Fire());
     }
 
