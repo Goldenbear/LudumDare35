@@ -247,6 +247,11 @@ public class LevelManager : MonoBehaviour
 
     void ChooseNewDirector()
     {
+        if(activeDirector != null)
+        {
+            Destroy(activeDirector.gameObject);
+        }
+
         var d = new GameObject[] { JoshSpawnPrefab, SeanSpawnPrefab, SpencerSpawnPrefab, TomSpawnPrefab };
         int index;
 
@@ -255,6 +260,8 @@ public class LevelManager : MonoBehaviour
             index = Random.Range(0, 4);
         } while (d[index] == null);
 
+
+        Debug.LogFormat("<color=purple>Started Director:</color> {0}", d[index].name);
         activeDirector = Instantiate<GameObject>(d[index]).GetComponent<SpawnDirector>();
     }
 
