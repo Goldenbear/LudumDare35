@@ -48,7 +48,12 @@ public class LevelManager : MonoBehaviour
 	public SoundConfig				m_backgroundSound;
 	public SoundConfig				m_gameOverSound;
 
-	public Player[] Players { get { return m_players; } }
+    public GameObject JoshSpawnPrefab;
+    public GameObject SeanSpawnPrefab;
+    public GameObject SpencerSpawnPrefab;
+    public GameObject TomSpawnPrefab;
+
+    public Player[] Players { get { return m_players; } }
 
 	// Private members
 	private ELevelState 			m_levelState = ELevelState.k_intro;
