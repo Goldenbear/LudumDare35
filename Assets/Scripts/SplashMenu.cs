@@ -69,6 +69,7 @@ public class SplashMenu : MonoBehaviour
 			Input.GetKeyDown("space") ||
 			Input.GetKeyDown("return") )
 		{
+			// If a P1 input starts the game ensure that is used in single player
 			if(m_currentButton == 0)
 				GameManager.Get.GameStart(1, 1);
 			else
@@ -81,6 +82,7 @@ public class SplashMenu : MonoBehaviour
 			Input.GetButtonDown("P2Fire3"+suffix) ||
 			Input.GetButtonDown("P2Fire4"+suffix) )
 		{
+			// If a P2 input starts the game ensure that is used in single player
 			if(m_currentButton == 0)
 				GameManager.Get.GameStart(1, 2);
 			else
