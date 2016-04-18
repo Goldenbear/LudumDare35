@@ -15,12 +15,10 @@ public class SpawnDirector : MonoBehaviour
     Spawner previousSpawner;
     Spawner nextSpawner;
 
-    public bool IsComplete { get { return spawnOrder.Count == 0 && nextSpawner == null; } }
+    public bool IsComplete { get { return spawnOrder.Count == 0 && previousSpawner == null && nextSpawner == null; } }
 
     void Awake()
     {
-        // TODO: This is happening twice?
-        Debug.Log("SpawnDirector " + this.name + " AWAKE");
         spawnOrder = new List<Spawner>(GetComponentsInChildren<Spawner>());
         foreach(Spawner s in spawnOrder)
         {
@@ -49,10 +47,10 @@ public class SpawnDirector : MonoBehaviour
 
     void SelectNextSpawner()
     {
+        previousSpawner = nextSpawner;
+
         if (spawnOrder.Count > 0)
         {
-            previousSpawner = nextSpawner;
-
             int nextIndex = 0;
             if(isOrderRandom)
             {
