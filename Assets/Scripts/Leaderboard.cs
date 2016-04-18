@@ -13,7 +13,7 @@ public class Leaderboard : MonoBehaviour
 
 	// Private members
 	private int m_p1NameCharIndex = 0;
-	private int m_p2NameCharIndex = 1;
+	private int m_p2NameCharIndex = 0;
 	private bool isAxisInNeutral = true;
 
 	// Use this for initialization

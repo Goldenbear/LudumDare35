@@ -138,8 +138,8 @@ public class LevelManager : MonoBehaviour
 
 			case ELevelState.k_gameover:
 			{				
-				// Return to splash screen?
-				if(Input.GetKeyDown("return"))
+				// Go to leaderboard screen
+				if(Time.time > m_messageTimer)
 					GameManager.Get.GameOver();
 			}
 			break;
@@ -191,7 +191,10 @@ public class LevelManager : MonoBehaviour
 				m_gameOverSound.Play(m_gameOverSource);
 
 				if(m_messageText != null)
+				{
 					m_messageText.text = "Game Over";
+					m_messageTimer = Time.time + 3.0f; 
+				}
 			}
 			break;
 
