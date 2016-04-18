@@ -124,7 +124,7 @@ public class Leaderboard : MonoBehaviour
 		}
 
 		// Edit P2 leaderboard name?
-		if(GameManager.Get.P1Index != -1)
+		if(GameManager.Get.P2Index != -1)
 		{
 			string prefix = "P"+GameManager.Get.PlayerTwoNumber;
 
