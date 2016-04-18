@@ -135,7 +135,7 @@ public class LevelManager : MonoBehaviour
 				// Level is over when all players are dead or inactive
 				for(int i=0; i<m_players.Length; i++)
 				{
-					if((m_players[i].m_health <= 0) || !m_players[i].gameObject.activeInHierarchy)
+					if((m_players[i].m_currentHealth <= 0) || !m_players[i].gameObject.activeInHierarchy)
 						numPlayersDead++;
 				}
 
