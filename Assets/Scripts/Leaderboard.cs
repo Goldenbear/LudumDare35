@@ -131,7 +131,6 @@ public class Leaderboard : MonoBehaviour
 				Input.GetButtonDown(prefix+"Fire2"+suffix) || 
 				Input.GetButtonDown(prefix+"Fire3"+suffix) || 
 				Input.GetButtonDown(prefix+"Fire4"+suffix) || 
-				Input.GetKeyDown("space") ||
 				Input.GetKeyDown("return") )
 			{
 				if((m_p1NameCharIndex >= 3) && (m_p2NameCharIndex >= 3))
@@ -210,7 +209,8 @@ public class Leaderboard : MonoBehaviour
 			if( Input.GetButtonDown(prefix+"Fire1"+suffix) ||
 				Input.GetButtonDown(prefix+"Fire2"+suffix) ||
 				Input.GetButtonDown(prefix+"Fire3"+suffix) ||
-				Input.GetButtonDown(prefix+"Fire4"+suffix) )
+				Input.GetButtonDown(prefix+"Fire4"+suffix) ||
+				Input.GetKeyDown("space") )
 			{
 				if((m_p1NameCharIndex >= 3) && (m_p2NameCharIndex >= 3))
 				{
