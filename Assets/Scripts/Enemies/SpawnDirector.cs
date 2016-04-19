@@ -16,7 +16,7 @@ public class SpawnDirector : MonoBehaviour
     Spawner nextSpawner;
     float currentDelay;
 
-    public bool IsComplete { get { return spawnOrder.Count == 0 && previousSpawner == null && nextSpawner == null; } }
+    public bool IsComplete { get { return spawnOrder.Count == 0 && previousSpawner == null && nextSpawner == null && spawnedEnemies.Count == 0; } }
 
     void Awake()
     {

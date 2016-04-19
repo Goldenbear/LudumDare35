@@ -69,19 +69,19 @@ public class Projectile : MonoBehaviour {
         // If projectile hit a ship then notify the gun that fired us
         Ship otherShip = otherCollider.gameObject.GetComponent<Ship>();
 
-        if (otherShip != null && FiredFromGun != null && FiredFromGun.AttachedToShip != null)
+        if (otherShip != null)
         {
             Ship originShip = FiredFromGun.AttachedToShip;
 
             // Enemies don't shoot each other
-            if (!(otherShip is Player) && !(originShip is Player))
+            if (!(otherShip is Player) && (this.tag == "EnemyShot"))
                 return;
 
             // Don't hit yourself stupid
             if (otherShip == originShip)
                 return;
 
-            if (otherShip is Player && originShip is Player)
+            if (otherShip is Player && (this.tag != "EnemyShot"))
                 return;
 
             if (DoesProjectileHurtShip(otherShip.m_currentShape, this.type))

@@ -112,13 +112,18 @@ public class Leaderboard : MonoBehaviour
 					isP1AxisInNeutral = true;
 				}
 
-				// Update display name
+				// Update display name flashing letter being edited
 				SetEntryName(m_scores[GameManager.Get.P1Index], GameManager.Get.HighNames[GameManager.Get.P1Index]);
 				if((Time.time % 0.5f) < 0.25f)
 				{
 					string tempName = ReplaceChar(GameManager.Get.HighNames[GameManager.Get.P1Index], m_p1NameCharIndex, '_');
 					SetEntryName(m_scores[GameManager.Get.P1Index], tempName);
 				}
+			}
+			else
+			{
+				// Update display name
+				SetEntryName(m_scores[GameManager.Get.P1Index], GameManager.Get.HighNames[GameManager.Get.P1Index]);
 			}
 
 			// Next letter
@@ -136,7 +141,7 @@ public class Leaderboard : MonoBehaviour
 
 				m_p1NameCharIndex++;
 
-				if(m_p2NameCharIndex == 3)
+				if((m_p1NameCharIndex >= 3) && (m_p2NameCharIndex >= 3))
 					AllDone();
 			}
 		}
@@ -187,13 +192,18 @@ public class Leaderboard : MonoBehaviour
 					isP2AxisInNeutral = true;
 				}
 
-				// Update display name
+				// Update display name flashing letter being edited
 				SetEntryName(m_scores[GameManager.Get.P2Index], GameManager.Get.HighNames[GameManager.Get.P2Index]);
 				if((Time.time % 0.5f) < 0.25f)
 				{
 					string tempName = ReplaceChar(GameManager.Get.HighNames[GameManager.Get.P2Index], m_p2NameCharIndex, '_');
 					SetEntryName(m_scores[GameManager.Get.P2Index], tempName);
 				}
+			}
+			else
+			{
+				// Update display name
+				SetEntryName(m_scores[GameManager.Get.P2Index], GameManager.Get.HighNames[GameManager.Get.P2Index]);
 			}
 
 			// Next letter
@@ -209,15 +219,16 @@ public class Leaderboard : MonoBehaviour
 
 				m_p2NameCharIndex++;
 
-				if(m_p2NameCharIndex == 3)
+				if((m_p1NameCharIndex >= 3) && (m_p2NameCharIndex >= 3))
 					AllDone();
 			}
+
 		}
 	}
 
 	private void AllDone()
 	{
 		Text text = m_message.GetComponent<Text>();
-		text.text = "";
+		text.text = "Press any button to continue";
 	}
 }
