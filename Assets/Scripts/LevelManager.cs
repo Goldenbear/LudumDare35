@@ -80,6 +80,14 @@ public class LevelManager : MonoBehaviour
 		// Find players
 		m_players = FindObjectsOfType(typeof(Player)) as Player[];
 
+		// Ensure players are in player number order
+		if((m_players.Length == 2) && (m_players[0].m_playerNumber == 1))
+		{
+			Player temp = m_players[0];
+			m_players[0] = m_players[1];
+			m_players[1] = temp;
+		}
+
 		// Deactivate unwanted players
 		for(int i=0; i<m_players.Length; i++)
 			if(m_players[i].m_playerNumber >= GameManager.Get.NumPlayers)
